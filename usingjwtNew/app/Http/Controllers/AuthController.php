@@ -29,7 +29,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
+            'username' => 'required|string',
             // 'password' => 'required|string|min:6',
             'password' => 'required|string|min:6'
         ]);
@@ -53,12 +53,22 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|between:2,100',
-            'email' => 'required|string|email|max:100|unique:users',
+            'username' => 'required|string|between:2,100',
+            // 'email' => 'required|string|email|max:100|unique:users',
             'password' => 'required|string|confirmed|min:6',
-            'role' => 'required|string',
-	    'accessrole' => 'required|string'
+            'detail_user_id' => 'required',
+	        // 'accessrole' => 'required|string'
         ]);
+        // $validatorDetail = Validator::make($request->all(),[
+        //     'fullname' => 'required|string',
+        //     'name' => 'required|string',
+        //     'birth_date' => 'required|date',
+        //     'join_date' => 'required|date',
+        //     'position_id' => 'required',
+        //     'NIK' => 'required',
+        //     'NPWP' => 'required',
+        //     'email' => 'required|string|email|max:100|unique:detail_user'
+        // ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors()->toJson(), 400);
@@ -68,6 +78,7 @@ class AuthController extends Controller
             $validator->validated(),
             ['password' => bcrypt($request->password)]
         ));
+
 
         return response()->json([
             'message' => 'User successfully registered',
