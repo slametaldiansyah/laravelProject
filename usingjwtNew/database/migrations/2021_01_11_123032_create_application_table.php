@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddAccessRoleColumenToUserTable extends Migration
+class CreateApplicationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class AddAccessRoleColumenToUserTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->enum('accessrole', ['superadmin', 'manager', 'user'])
-                ->default('user');
+        Schema::create('application', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
         });
     }
 
@@ -26,8 +27,6 @@ class AddAccessRoleColumenToUserTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('application');
     }
 }
