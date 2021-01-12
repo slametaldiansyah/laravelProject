@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Detail_user;
+use App\Models\Position;
+use Illuminate\Support\Facades\DB;
 use Validator;
 
 
@@ -128,11 +131,19 @@ class AuthController extends Controller
      */
     protected function createNewToken($token)
     {
+        $id = auth()->user()->detail_user_id;
+        $id_position = DB::table('position')->select('name')->where('id', '=',$id )->get();
+        // $id_position = Detail_user::select('position_id')->where('id',$id)->get();
+        // $detail_user = Detail_user::where('id',$id)->get();
+        $user = auth()->user();
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60,
-            'user' => auth()->user()
+            'user' => $user,
+            // 'user' => auth()->user()->detail_user_id,
+            'detail_user' => Detail_user::where('id',$id)->get(),
+            'position' => $id_position
         ]);
     }
 }
