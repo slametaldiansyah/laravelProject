@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layouts.master2');
 });
 
 Route::get('/Dashboard', [DashboardController::class, 'index']);

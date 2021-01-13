@@ -1,14 +1,5 @@
 @extends('layouts.master')
-@push('below-css')
-<meta name="csrf-token" content="{{ csrf_token() }}">
-<title>Dashboard</title>
-<link  href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 
-
-
-@endpush
 @section('content')
 
 <div class="content-wrapper">
@@ -17,7 +8,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Dashboard</h1>
+            <h1 class="m-0 text-dark"> <strong> Dashboard </strong></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -32,191 +23,128 @@
 
     <!-- Main content -->
     <section class="content">
+
+
+    <!-- Info Box -->
+    {{-- <div class="card card-outline card-dark">
+        <div class="card-header">
+            <h3 class="card-title"><strong> Info Box </strong></h3>
+        </div>
+        <br>
+                            <!-- get count data -->
+                            @php
+                            $countuser = DB::table('users')->count();
+                            $countposition = DB::table('position')->count();
+                            $countdetailuser = DB::table('detail_user')->count();
+                            @endphp
         <div class="row">
-            <div class="col-6">
-      <div class="container-fluid">
-        <div class="card card-primary">
-            <div class="card-header">
-              <h3 class="card-title">User Data</h3>
+            <div class="col-4">
+                <div class="container-fluid">
+                    <div class="small-box bg-gradient-success">
+                        <div class="inner">
+                          <h3>{{ $countuser }}</h3>
+                          <p>Users</p>
+                        </div>
+                        <div class="icon">
+                          <i class="fas fa-users"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">
+                            Table info <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                      </div>
+                </div>
             </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-
-
-
-   {{-- <div class="row">
-    <div class="form-group col-md-6">
-    <h5>Start Date <span class="text-danger"></span></h5>
-    <div class="controls">
-        <input type="date" name="start_date" id="start_date" class="form-control datepicker-autoclose" placeholder="Please select start date"> <div class="help-block"></div></div>
-    </div>
-    <div class="form-group col-md-6">
-    <h5>End Date <span class="text-danger"></span></h5>
-    <div class="controls">
-        <input type="date" name="end_date" id="end_date" class="form-control datepicker-autoclose" placeholder="Please select end date"> <div class="help-block"></div></div>
-    </div>
-    <div class="text-left" style="
-    margin-left: 15px;
-    ">
-    <button type="text" id="btnFiterSubmitSearch" class="btn btn-info">Submit</button>
-    </div>
+            <div class="col-4">
+                <div class="container-fluid">
+                    <div class="small-box bg-gradient-primary">
+                        <div class="inner">
+                          <h3>{{ $countposition }}</h3>
+                          <p>Position</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-door-open"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">
+                          Table info <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                      </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="container-fluid">
+                    <div class="small-box bg-gradient-secondary">
+                        <div class="inner">
+                          <h3>{{ $countdetailuser }}</h3>
+                          <p>Detail Users</p>
+                        </div>
+                        <div class="icon">
+                          <i class="fas fa-user"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">
+                            Table info <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                      </div>
+                </div>
+            </div>
+        </div>
     </div> --}}
-    <table class="table table-striped" id="user_datatable">
-       <thead>
-          <tr>
-             <th>Id</th>
-             <th>Name</th>
-             <th>Created at</th>
-          </tr>
-       </thead>
-    </table>
 
-
-            </div>
-            <!-- /.card-body -->
-          </div>
-      </div><!-- /.container-fluid -->
-            </div>
-
-
-
-{{-- div dua --}}
-<div class="col-6">
-    <div class="container-fluid">
-      <div class="card card-primary">
-          <div class="card-header">
-            <h3 class="card-title">Position</h3>
-          </div>
-          <!-- /.card-header -->
-          <div class="card-body">
-
-  <table class="table table-striped" id="position_datatable">
-     <thead>
-        <tr>
-           <th>Id</th>
-           <th>Name</th>
-        </tr>
-     </thead>
-  </table>
-
-
-          </div>
-          <!-- /.card-body -->
+    @php
+    $countuser = DB::table('users')->count();
+    $countposition = DB::table('position')->count();
+    $countdetailuser = DB::table('detail_user')->count();
+    @endphp
+    <div class="card card-outline card-dark">
+        <div class="card-header">
+            <h3 class="card-title"><strong> Info Box </strong></h3>
         </div>
-    </div><!-- /.container-fluid -->
-          </div>
-
-    </div>
-
     <div class="row">
-        <div class="col-12">
-            <div class="container-fluid">
-              <div class="card card-primary">
-                  <div class="card-header">
-                    <h3 class="card-title">Detail User</h3>
-                  </div>
-                  <!-- /.card-header -->
-                  <div class="card-body">
-                        <table class="table table-striped" id="detailuser_datatable">
-                            <thead>
-                             <tr>
-                                <th>Fullname</th>
-                                <th>Name</th>
-                                <th>Birth</th>
-                                <th>Join</th>
-                                <th>NIK</th>
-                                <th>NPWP</th>
-                                <th>Email</th>
-                             </tr>
-                            </thead>
-                        </table>
-                  </div>
-                  <!-- /.card-body -->
-              </div>
-            </div><!-- /.container-fluid -->
+        <div class="col-12 col-sm-6 col-md-3">
+          <div class="info-box">
+            <span class="info-box-icon bg-info elevation-1"><i class="fas fa-user"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Users</span>
+              <span class="info-box-number">
+                {{$countuser}}
+              </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
         </div>
+        <!-- /.col -->
+        <div class="col-12 col-sm-6 col-md-3">
+          <div class="info-box mb-3">
+            <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-door-open"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Position</span>
+              <span class="info-box-number">{{$countposition}}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+
+        <!-- fix for small devices only -->
+        <div class="clearfix hidden-md-up"></div>
+
+        <div class="col-12 col-sm-6 col-md-3">
+          <div class="info-box mb-3">
+            <span class="info-box-icon bg-success elevation-1"><i class="fas fa-users"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Detail User</span>
+              <span class="info-box-number">{{$countdetailuser}}</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+
+        <!-- /.col -->
+      </div>
     </div>
-
-    </section>
-    <!-- /.content -->
-  </div>
-
-
 @endsection
-@push('below-scripts')
-<script>
-    $(document).ready( function () {
-        $.ajaxSetup({
-             headers: {
-                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-             }
-         });
-     $('#user_datatable').DataTable({
-            language: {searchPlaceholder: "Search records", search: "",},
-            processing: true,
-            serverSide: true,
-            ajax: {
-             url: "{{ url('users-list') }}",
-             type: 'GET',
-            //  data: function (d) {
-            //  d.start_date = $('#start_date').val();
-            //  d.end_date = $('#end_date').val();
-            //  }
-            },
-            columns: [
-                     { data: 'id', name: 'id' },
-                     { data: 'username', name: 'username' },
-                    //  { data: 'email', name: 'email' },
-                     { data: 'created_at', name: 'created_at' }
-                  ]
-         });
-      });
-
-//position
-      $(document).ready( function () {
-        $.ajaxSetup({
-             headers: {
-                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-             }
-         });
-     $('#position_datatable').DataTable({
-
-            language: {searchPlaceholder: "Search records",search: "",},
-            processing: true,
-            serverSide: true,
-            ajax: {
-             url: "{{ url('position-list') }}",
-             type: 'GET',
-                  },
-                    columns: [{ data: 'id', name: 'id' },
-                              { data: 'name', name: 'name' }]
-         });
-      });
-
-//Detail_user
-$(document).ready( function () {
-        $.ajaxSetup({
-             headers: {
-                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-             }
-         });
-     $('#detailuser_datatable').DataTable({
-
-            language: {searchPlaceholder: "Search records",search: "",},
-            processing: true,
-            serverSide: true,
-            ajax: {
-             url: "{{ url('detailuser-list') }}",
-             type: 'GET',
-                  },
-                    columns: [{ data: 'fullname', name: 'fullname' },
-                              { data: 'name', name: 'name' },
-                              { data: 'birth_date', name: 'birth_date' },
-                              { data: 'join_date', name: 'join_date' },
-                              { data: 'NIK', name: 'NIK' },
-                              { data: 'NPWP', name: 'NPWP' },
-                              { data: 'email', name: 'email' },]
-         });
-      });
-   </script>
-@endpush
