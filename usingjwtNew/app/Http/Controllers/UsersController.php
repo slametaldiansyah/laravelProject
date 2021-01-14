@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Detail_user;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -9,7 +10,7 @@ class UsersController extends Controller
 {
     public function index()
     {
-        return view('content.users');
+        return view('content.management.users');
     }
     public function userList()
     {
@@ -28,4 +29,18 @@ class UsersController extends Controller
         return datatables()->of($users)
             ->make(true);
     }
+
+    //Detail User
+    public function detail_user()
+    {
+        return view('content.management.detail-user');
+    }
+    public function detailUserList()
+    {
+        $usersQuery = Detail_user::query();
+        $users = $usersQuery->select('*');
+        return datatables()->of($users)
+            ->make(true);
+    }
+
 }

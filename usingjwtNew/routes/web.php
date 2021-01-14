@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,10 +16,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('layouts.master2');
+    return view('welcome');
 });
 
-Route::get('/Dashboard', [DashboardController::class, 'index']);
-Route::get('users-list', [DashboardController::class, 'userList']);
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('position-list', [DashboardController::class, 'positionList']);
 Route::get('detailuser-list', [DashboardController::class, 'detailuserList']);
+
+//Management
+Route::get('/management/users', [UsersController::class,'index'])->name('users');
+Route::get('users-list', [UsersController::class, 'userList']);
+Route::get('/management/detail-user', [UsersController::class, 'detail_user'])->name('detail-user');
+Route::get('detail-user-list', [UsersController::class, 'detailUserList']);

@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link bg-primary">
+    <a href="index3.html" class="brand-link bg-gradient-primary">
       <img src="{{asset('assets/')}}/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light"><strong>AUTH SERVER</strong></span>
     </a>
@@ -25,7 +25,7 @@
                with font-awesome or any other icon font library -->
 
                <li class="nav-item">
-                  <a href="pages/widgets.html" class="nav-link">
+                  <a href="{{ route('dashboard') }}" class="nav-link {{ (request()->is('dashboard')) ? 'active' : '' }}">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                     <p>
                       Dashboard
@@ -35,7 +35,7 @@
                 </li>
 
                 <li class="nav-header">MANAGEMENT</li>
-                <li class="nav-item">
+                <li class="nav-item {{ (request()->is('management/*')) ? 'menu-open' : '' }}">
                   <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-table"></i>
                     <p>
@@ -45,13 +45,13 @@
                   </a>
                   <ul class="nav nav-treeview" style="display: none;">
                     <li class="nav-item">
-                      <a href="pages/tables/simple.html" class="nav-link">
+                      <a href="{{ route('users') }}" class="nav-link {{ (request()->is('management/users')) ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Users</p>
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a href="pages/tables/data.html" class="nav-link">
+                      <a href="{{ route('detail-user') }}" class="nav-link {{ (request()->is('management/detail-user')) ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Detail User</p>
                       </a>

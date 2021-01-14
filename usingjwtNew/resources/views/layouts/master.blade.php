@@ -29,9 +29,9 @@
     @extends('layouts.sidebar')
 
     <!-- Content Wrapper. Contains page content -->
-
+    <div class="content-wrapper" style="min-height: 1360.44px;">
     @yield('content')
-
+    </div>
     <!-- /.content-wrapper -->
 
     @extends('layouts.footer')
