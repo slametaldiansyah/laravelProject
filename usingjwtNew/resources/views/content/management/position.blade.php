@@ -18,7 +18,7 @@
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item">Home</li>
               <li class="breadcrumb-item">MANAGEMENT</li>
-              <li class="breadcrumb-item active"><a href="#">Users</a></li>
+              <li class="breadcrumb-item active"><a href="#">Position</a></li>
             </ol>
           </div>
         </div>
@@ -35,7 +35,7 @@
 
             <div class="card">
               <div class="card-header bg-gradient-primary">
-                <h3 class="card-title">USERS</h3>
+                <h3 class="card-title">POSITION</h3>
               </div>
               <!-- /.card-header -->
             <div class="card-body">
@@ -86,12 +86,12 @@ $(document).ready( function () {
         processing: true,
         serverSide: true,
         ajax: {
-          url: "{{ url('users-list') }}",
+          url: "{{ url('position-list') }}",
           type: 'GET',
           },
                 columns: [
                         {data: 'id', name: 'id'},
-                        {data: 'username', name: 'username'},
+                        {data: 'name', name: 'name'},
                     ],
         language: {
             searchPlaceholder: "Search",

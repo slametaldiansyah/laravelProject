@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Detail_user;
+use App\Models\Position;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -42,5 +43,20 @@ class UsersController extends Controller
         return datatables()->of($users)
             ->make(true);
     }
+
+
+    //Position get
+    public function position()
+    {
+        return view('content.management.position');
+    }
+    public function positionList()
+    {
+        $usersQuery = Position::query();
+        $position = $usersQuery->select('*');
+        return datatables()->of($position)
+            ->make(true);
+    }
+
 
 }

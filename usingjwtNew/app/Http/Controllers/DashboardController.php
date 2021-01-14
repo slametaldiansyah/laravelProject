@@ -15,14 +15,7 @@ class DashboardController extends Controller
     }
 
 
-    //Position get
-    public function positionList()
-    {
-        $usersQuery = Position::query();
-        $position = $usersQuery->select('*');
-        return datatables()->of($position)
-            ->make(true);
-    }
+
 
     public function detailuserList()
     {

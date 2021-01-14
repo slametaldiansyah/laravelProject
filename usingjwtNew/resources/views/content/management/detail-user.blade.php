@@ -48,6 +48,13 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Fullname</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>BirthDay</th>
+                                        <th>Join</th>
+                                        <th>Position</th>
+                                        <th>NIK</th>
+                                        <th>NPWP</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -80,12 +87,20 @@
             processing: true,
             serverSide: true,
             ajax: {
-              url: "{{ url('detailuser-list') }}",
+              url: "{{ url('detail-user-list') }}",
               type: 'GET',
-                    columns: [
-                            {data: 'id', name: 'id'},
-                            {data: 'fullname', name: 'fullname'},
-                        ]},
+              },
+            columns: [
+                    {data: 'id', name: 'id'},
+                    {data: 'fullname', name: 'fullname'},
+                    {data: 'name', name: 'name'},
+                    {data: 'email', name: 'email'},
+                    {data: 'birth_date', name: 'birth'},
+                    {data: 'join_date', name: 'join'},
+                    {data: 'position_id', name: 'position'},
+                    {data: 'NIK', name: 'NIK'},
+                    {data: 'NPWP', name: 'NPWP'},
+                        ],
             language: {
                 searchPlaceholder: "Search",
                 search : '<i class="fas fa-search"></i>',

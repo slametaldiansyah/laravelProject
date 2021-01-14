@@ -57,7 +57,7 @@
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a href="pages/tables/jsgrid.html" class="nav-link">
+                      <a href="{{ route('position') }}" class="nav-link {{ (request()->is('management/position')) ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Position</p>
                       </a>
@@ -66,7 +66,7 @@
                 </li>
 
 
-                <li class="nav-item">
+                <li class="nav-item {{ (request()->is('applicationaccess/*')) ? 'menu-open' : '' }}">
                   <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-table"></i>
                     <p>
@@ -76,19 +76,19 @@
                   </a>
                   <ul class="nav nav-treeview">
                     <li class="nav-item">
-                      <a href="pages/mailbox/mailbox.html" class="nav-link">
+                      <a href="{{ route('authRole') }}" class="nav-link {{ (request()->is('applicationaccess/authrole')) ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Auth Role</p>
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a href="pages/mailbox/compose.html" class="nav-link">
+                      <a href="{{ route('role') }}" class="nav-link {{ (request()->is('applicationaccess/role')) ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Role</p>
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a href="pages/mailbox/read-mail.html" class="nav-link">
+                      <a href="{{ route('application') }}" class="nav-link {{ (request()->is('applicationaccess/application')) ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Application</p>
                       </a>

@@ -12,13 +12,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>MANAGEMENT</h1>
+            <h1>APPLICATION ACCESS</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item">Home</li>
-              <li class="breadcrumb-item">MANAGEMENT</li>
-              <li class="breadcrumb-item active"><a href="#">Users</a></li>
+              <li class="breadcrumb-item">APPLICATION ACCESS</li>
+              <li class="breadcrumb-item active"><a href="#">Auth Role</a></li>
             </ol>
           </div>
         </div>
@@ -35,7 +35,7 @@
 
             <div class="card">
               <div class="card-header bg-gradient-primary">
-                <h3 class="card-title">USERS</h3>
+                <h3 class="card-title">AUTH ROLE</h3>
               </div>
               <!-- /.card-header -->
             <div class="card-body">
@@ -46,16 +46,12 @@
                             <table id="aldiTable" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
+                                        {{-- <th>ID</th> --}}
+                                        <th>Username</th>
+                                        <th>Role</th>
+                                        <th>Application</th>
                                     </tr>
                                 </thead>
-                                {{-- <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>2</td>
-                                    </tr>
-                                </tbody> --}}
                             </table>
                         </div>
                         <!-- /.card-body -->
@@ -76,31 +72,32 @@
 
 @push('below-scripts')
 <script>
-$(document).ready( function () {
-    $.ajaxSetup({
-          headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-      });
-    $('#aldiTable').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: {
-          url: "{{ url('users-list') }}",
-          type: 'GET',
-          },
-                columns: [
-                        {data: 'id', name: 'id'},
-                        {data: 'username', name: 'username'},
+    $(document).ready( function () {
+        $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
+          });
+        $('#aldiTable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+              url: "{{ url('authrole-list') }}",
+              type: 'GET',
+              },
+            columns: [
+                    {data: 'username', name: 'username'},
+                    {data: 'rolename', name: 'rolename'},
+                    {data: 'applicationname', name: 'applicationname'},
                     ],
-        language: {
-            searchPlaceholder: "Search",
-            search : '<i class="fas fa-search"></i>',
-            'paginate': {
-                'previous': '<a>Back <i class="fas fa-hand-point-left"></i></a>',
-                'next': '<a><i class="fas fa-hand-point-right"></i> Next</a>',
-                }}
+            language: {
+                searchPlaceholder: "Search",
+                search : '<i class="fas fa-search"></i>',
+                'paginate': {
+                    'previous': '<a>Back <i class="fas fa-hand-point-left"></i></a>',
+                    'next': '<a><i class="fas fa-hand-point-right"></i> Next</a>',
+                    }}
+        });
     });
-});
-  </script>
+      </script>
 @endpush
