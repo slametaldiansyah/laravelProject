@@ -38,3 +38,8 @@ Route::get('/applicationaccess/role', [AppAccessController::class, 'role'])->nam
 Route::get('role-list', [AppAccessController::class, 'roleList']);
 Route::get('/applicationaccess/authrole', [AppAccessController::class, 'authRole'])->name('authRole');
 Route::get('authrole-list', [AppAccessController::class, 'authRoleList']);
+
+//chart
+Route::get('role-chart', [DashboardController::class, 'chartRole']);
+Route::get('app-chart', [DashboardController::class, 'chartAppication']);
+Route::get('position-chart', [DashboardController::class, 'chartPosition']);

@@ -1,5 +1,10 @@
 @extends('layouts.master')
 
+@push('below-css')
+<link href="{{asset('assets/')}}/costume/chartcostume.css" rel="stylesheet">
+@endpush
+
+
 @section('content')
 
     <!-- Content Header (Page header) -->
@@ -92,13 +97,15 @@
     $countuser = DB::table('users')->count();
     $countposition = DB::table('position')->count();
     $countdetailuser = DB::table('detail_user')->count();
+
     @endphp
+    <div class="container-fluid">
     <div class="card card-outline card-dark">
         <div class="card-header">
             <h3 class="card-title"><strong> Info Box </strong></h3>
         </div>
     <div class="row">
-        <div class="col-12 col-sm-6 col-md-3">
+        <div class="col-12 col-sm-6 col-md-6">
           <div class="info-box">
             <span class="info-box-icon bg-gradient-info elevation-1"><i class="fas fa-user"></i></span>
 
@@ -113,7 +120,7 @@
           <!-- /.info-box -->
         </div>
         <!-- /.col -->
-        <div class="col-12 col-sm-6 col-md-3">
+        {{-- <div class="col-12 col-sm-6 col-md-4">
           <div class="info-box mb-3">
             <span class="info-box-icon bg-gradient-danger elevation-1"><i class="fas fa-door-open"></i></span>
 
@@ -124,13 +131,13 @@
             <!-- /.info-box-content -->
           </div>
           <!-- /.info-box -->
-        </div>
+        </div> --}}
         <!-- /.col -->
 
         <!-- fix for small devices only -->
         <div class="clearfix hidden-md-up"></div>
 
-        <div class="col-12 col-sm-6 col-md-3">
+        <div class="col-12 col-sm-6 col-md-6">
           <div class="info-box mb-3">
             <span class="info-box-icon bg-gradient-success elevation-1"><i class="fas fa-users"></i></span>
 
@@ -145,4 +152,62 @@
 
         <!-- /.col -->
       </div>
+    </div>
+
+
+    <!-- Chart -->
+
+    <div class="card card-outline card-dark">
+        <div class="card-header">
+            <h3 class="card-title"><strong> Chart </strong></h3>
+        </div>
+    <div class="row">
+        <div class="col-6">
+          <div class="info-box">
+                <div id="container" style="width: 401px; height: 200px; margin: 0 auto"></div>
+          </div>
+        </div>
+        <div class="col-6">
+            <div class="info-box">
+                  <div id="container2" style="width: 401px; height: 200px; margin: 0 auto"></div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-12">
+          <div class="info-box">
+                <div id="container3" style="width: 601px; height: 300px; margin: 0 auto"></div>
+          </div>
+        </div>
+        {{-- <div class="col-6">
+            <div class="info-box">
+                  <div id="container2" style="width: 401px; height: 200px; margin: 0 auto"></div>
+            </div>
+        </div> --}}
+    </div>
+
+
+        <!-- fix for small devices only -->
+        <div class="clearfix hidden-md-up"></div>
+
+      {{-- </div> --}}
+    </div>
+</div>
+
+<!-- Chart -->
+
+    </section>
+
+
 @endsection
+@push('below-scripts')
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+@include('content.ajaxdashboard.chartrole')
+@include('content.ajaxdashboard.chartapplication')
+@include('content.ajaxdashboard.chartposition')
+@endpush

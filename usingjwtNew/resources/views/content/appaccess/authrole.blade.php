@@ -46,7 +46,7 @@
                             <table id="aldiTable" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        {{-- <th>ID</th> --}}
+                                        <th>No</th>
                                         <th>Username</th>
                                         <th>Role</th>
                                         <th>Application</th>
@@ -86,6 +86,11 @@
               type: 'GET',
               },
             columns: [
+                    {   data: 'DT_RowIndex',
+                        name: 'DT_RowIndex',
+                        orderable: false,
+                        searchable: false
+                        },
                     {data: 'username', name: 'username'},
                     {data: 'rolename', name: 'rolename'},
                     {data: 'applicationname', name: 'applicationname'},

@@ -48,7 +48,7 @@ class AppAccessController extends Controller
                                 ->get();
         //   var_dump($users);
         //   die();
-          return datatables()->of($app)
+          return datatables()->of($app)->addIndexColumn()
               ->make(true);
       }
 }
