@@ -131,10 +131,19 @@ class AuthController extends Controller
      */
     protected function createNewToken($token)
     {
+        $user_id = auth()->user()->id;
         $id = auth()->user()->detail_user_id;
-        $id_position = DB::table('position')->select('name')->where('id', '=',$id )->get();
-        // $id_position = Detail_user::select('position_id')->where('id',$id)->get();
-        // $detail_user = Detail_user::where('id',$id)->get();
+        $id_position = DB::table('position')->select('name')->where('id', '=',$id)->get();
+        $role = DB::table('auth_role')->groupBy('r.name')->select('r.name as rolename')
+                    ->join('users as u', 'auth_role.user_id', '=', 'u.id')
+                    ->join('role as r', 'auth_role.role_id', '=', 'r.id')
+                    ->where('auth_role.user_id', '=',$user_id)->get();
+        $app = DB::table('auth_role')->groupBy('app.name')->select('app.name as appname')
+                    ->join('users as u', 'auth_role.user_id', '=', 'u.id')
+                    ->join('application as app', 'auth_role.application_id', '=', 'app.id')
+                    ->where('u.id', '=',$user_id)->get();
+
+
         $user = auth()->user();
         return response()->json([
             'access_token' => $token,
@@ -143,7 +152,10 @@ class AuthController extends Controller
             'user' => $user,
             // 'user' => auth()->user()->detail_user_id,
             'detail_user' => Detail_user::where('id',$id)->get(),
-            'position' => $id_position
+            'position' => $id_position,
+            'role' => $role,
+            'app' => $app
+
         ]);
     }
 }
