@@ -16,6 +16,11 @@ class AuthController extends Controller
     {
         // Inputan yg diambil
         $credentials = $request->only('username', 'password');
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required',
+        ]);
+
         // dd($credentials);
         if ($credentials == true) {
             // return 'ok';
