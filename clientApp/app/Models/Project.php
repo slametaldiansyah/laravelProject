@@ -11,20 +11,20 @@ class Project extends Model
     use HasFactory;
     use SoftDeletes;
     protected $guarded=['id'];
-    
+
     public function contract()
     {
-    	return $this->belongsTo('App\Models\contract');
+    	return $this->belongsTo('App\Models\Contract');
     }
     public function progress_item()
     {
-    	return $this->hasMany('App\Models\progress_item');
+    	return $this->hasMany('App\Models\Progress_item');
     }
     public function project_cost()
     {
-    	return $this->hasMany('App\Models\project_cost');
+    	return $this->hasMany('App\Models\Project_cost');
     }
-    
+
     // public function getall()
     // {
     //   $data = Project::with(['contract.client'])->get();

@@ -26,6 +26,9 @@ Route::get('/login',[AuthController::class, 'index'])->name('login');
 Route::post('/login/api/ui', [AuthController::class, 'callapiusinglaravelui'])->name('loginui');
 Route::get('/logout',[AuthController::class, 'logout'])->name('logout');
 
+//user
+Route::get('/user-profile',[AuthController::class, 'userProfile'])->middleware('authapi')->name('profile');
+
 Route:: view('/operationals','v_operational')->middleware('authapi');
 Route::resource('/',ClientsController::class)->middleware('authapi');
 // Route::resource('/',[ClientsController::class]);

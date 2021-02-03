@@ -80,8 +80,12 @@
                         <img src="{{asset('assets/')}}/dist/img/user2-160x160.jpg" class="img-circle elevation-2"
                             alt="User Image">
                     </div>
+                    @php
+                    //Request Data
+                      $username = session()->get('token')['detail_user'][0]['fullname'];
+                    @endphp
                     <div class="info">
-                        <a href="#" class="d-block">Alexander Pierce</a>
+                        <a href="{{ route('profile')}}" class="d-block">{{$username}}</a>
                     </div>
                 </div>
 

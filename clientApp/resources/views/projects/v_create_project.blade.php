@@ -220,12 +220,16 @@
                                     value="{{old('total_price')}}" id="total_price" placeholder="Rp." onchange="math()">
                             </div>
                         </div>
+                        @php
+                        $userid = session()->get('token')['user']['id'];
+                        @endphp
                         <div class="d-flex justify-content-center">
                             <div class="form-group col-4"></div>
                             <div class="form-group col-2">
-                                <label for="created_by">Created by</label><label style="color:#dc3545;">*</label>
+                                <label for="created_by">Created by</label>
+                                {{-- <label style="color:#dc3545;">*</label> --}}
                                 <input type="number" class="form-control @error('created_by') is-invalid @enderror"
-                                    id="created_by" name="created_by" value="{{old('created_by')}}" />
+                                    id="created_by" name="created_by" value="{{$userid}}" readonly/>
                                 @error('created_by')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror

@@ -22,6 +22,12 @@
                 <div class="card-body">
                     <div class="form">
                         <div class="d-flex justify-content-around">
+
+                            @php
+                            $userid = session()->get('token')['user']['id'];
+                            // $username = session()->get('token')['detail_user'][0]['fullname'];
+                            @endphp
+
                             <div class="form-group col-4">
                                 <label for="name">Contract Name</label><label style="color:#dc3545;">*</label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
@@ -122,9 +128,9 @@
                             </div>
                             <div class="form-group col-4"></div>
                             <div class="form-group col-2">
-                                <label for="created_by">Created by</label><label style="color:#dc3545;">*</label>
+                                <label for="created_by">Created by</label>
                                 <input type="number" class="form-control @error('created_by') is-invalid @enderror"
-                                    id="created_by" name="created_by" value="{{old('created_by')}}">
+                                    id="created_by" name="created_by" value="{{$userid}}" readonly>
                                 @error('created_by')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror

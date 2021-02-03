@@ -69,4 +69,9 @@ class AuthController extends Controller
             return response('Unauthorized.', 401);
         }
     }
+
+    public function userProfile()
+    {
+        return view('auth.profile-login');
+    }
 }

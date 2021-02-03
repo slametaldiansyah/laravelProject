@@ -11,20 +11,20 @@ class Contract extends Model
     use HasFactory;
     use SoftDeletes;
     protected $guarded=['id'];
-    
+
     public function client()
     {
-    	return $this->belongsTo('App\Models\client');
+    	return $this->belongsTo('App\Models\Client');
     }
     public function doc()
     {
-    	return $this->hasMany('App\Models\contract_doc');
+    	return $this->hasMany('App\Models\Contract_doc');
     }
     public function project()
     {
-    	return $this->hasMany('App\Models\project');
+    	return $this->hasMany('App\Models\Project');
     }
-    
+
     protected static function boot() {
     parent::boot();
 

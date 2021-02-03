@@ -12,13 +12,19 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('assets/')}}/dist/css/adminlte.min.css">
     <style type="text/css">
-		body
+		/* body
 		{
             background-position-y: bottom;
 			background-image:url('assets/dist/img/kantor3.jpg');
             background-size: 100%;
             background-repeat: no-repeat;
-		}
+		} */
+
+        .login-page
+        {
+        background: url("assets/dist/img/kantor3.jpg") no-repeat center center fixed;
+        background-size: cover;
+        }
         .card
         {
             box-shadow: 0 0 200px rgb(0 0 0 / 2000%), 0 1px 3px rgb(0 0 0 / 2000%);
@@ -31,8 +37,8 @@
         .h1
         {
             /* -webkit-text-stroke: 1px rgb(0, 0, 0); */
-            text-shadow: -4px 0 rgb(255, 72, 0), 0 2px rgb(253, 38, 38), 3px 0 black, 0 -3px rgb(3, 3, 3);
-            color: #0026ff;
+            text-shadow: -4px 0 rgb(32, 11, 2), 0 2px rgb(0, 0, 0), 3px 0 black, 0 -3px rgb(3, 3, 3);
+            color: #7182e0;
             font-size: 52px;
             font-family: sans;
             /* lighting-color: rgb(255, 255, 255); */
@@ -41,15 +47,15 @@
         }
         p
         {
-            text-shadow: -1px 0 rgb(255, 72, 0), 0 1px rgb(253, 38, 38), 1px 0 black, 0 -1px rgb(3, 3, 3);
-            color: #0026ff;
+            text-shadow: -2px 0 rgb(24, 7, 1), 0 2px rgb(31, 0, 0), 2px 0 black, 0 -2px rgb(3, 3, 3);
+            color: #ffffff;
             font-family: sans;
         }
         .btn-custome
         {
             color: rgb(202, 196, 196);
             background-color: #007bff;
-            text-shadow: -1px 0 rgb(255, 72, 0), 0 1px rgb(253, 38, 38), 1px 0 black, 0 -1px rgb(3, 3, 3);
+            text-shadow: -1px 0 rgb(14, 4, 0), 0 1px rgb(19, 1, 1), 1px 0 black, 0 -1px rgb(3, 3, 3);
             border-color: #007bff;
             box-shadow: none;
             font-family: sans;
