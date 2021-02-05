@@ -157,11 +157,11 @@
                             </div>
                             <div class="form-group col-4"></div>
                             <div class="form-group col-2">
-                                <label for="created_by">Created by</label>
+                                {{-- <label for="created_by">Created by</label>
                                 <input type="number" class="form-control @error('created_by') is-invalid @enderror"
                                     id="created_by" name="created_by"
                                     value="{{old('created_by', $contract->created_by)}}"
-                                    {{ $contract['created_by'] ? 'disabled' : '' }}>
+                                    {{ $contract['created_by'] ? 'disabled' : '' }}> --}}
                             </div>
                         </div>
                         @foreach($filename as $file)

@@ -7,6 +7,8 @@ use App\Models\Client;
 use Illuminate\Http\Request;
 use App\Models\Contract_history;
 use App\Models\Contract_doc;
+use App\Models\Type;
+use Carbon\Carbon;
 use File;
 use Validator;
 use Illuminate\Support\Facades\DB;
@@ -31,7 +33,8 @@ class ContractsController extends Controller
     public function create()
     {
         $clients= Client::all();
-        return view('contracts.v_create_contract', compact('clients'));
+        $types= Type::all();
+        return view('contracts.v_create_contract', compact('clients','types'));
     }
 
     /**
@@ -46,7 +49,6 @@ class ContractsController extends Controller
         'name' => 'required',
         'client_id' => 'required',
         'cont_num' => 'required|integer|min:1',
-        'created_by' => 'required|integer|min:1',
         ]);
         $validator = Validator::make($request->all(), [
         'filename.*' => 'required|mimes:pdf,xlx,csv,doc,docx',
@@ -57,11 +59,15 @@ class ContractsController extends Controller
                             ->withInput();
               }
 
+        $userid = session()->get('token')['user']['id'];
+        $request->merge([
+         'created_by' => $userid,
+        ]);
         $contract = Contract::create($request->all());
         $files = $request->file('filename');
         if($files){
             foreach ($files as $file) {
-                $filename = time().'.'.$file->getClientOriginalName();  
+                $filename = time().'.'.$file->getClientOriginalName();
                 Contract_doc::create([
                 'filename' => $filename,
                 'contract_id' => $contract->id,
@@ -114,7 +120,7 @@ class ContractsController extends Controller
                     ->with('errorUpload', 'The file upload must be a file of type: pdf, xlx, csv, doc, docx.')
                     ->withInput();
         }
-         
+
         $dataOlds =Contract::all();
         foreach($dataOlds as $dataold){
             if($dataold->id==$contract->id){
@@ -135,7 +141,7 @@ class ContractsController extends Controller
             ->update([
             'name' => $name,
             ]);
-            
+
         }else{
             Contract::where('id', $contract->id)
             ->update(['name' => $request->name]);
@@ -145,7 +151,7 @@ class ContractsController extends Controller
             ->update([
             'client_id' => $client_id,
             ]);
-            
+
         }else{
             Contract::where('id', $contract->id)
             ->update(['client_id' => $request->client_id]);
@@ -155,7 +161,7 @@ class ContractsController extends Controller
             ->update([
             'cont_num' => $cont_num,
             ]);
-            
+
         }else{
             Contract::where('id', $contract->id)
             ->update(['cont_num' => $request->cont_num]);
@@ -165,7 +171,7 @@ class ContractsController extends Controller
             ->update([
             'sign_date' => $sign_date,
             ]);
-            
+
         }else{
             Contract::where('id', $contract->id)
             ->update(['sign_date' => $request->sign_date]);
@@ -175,7 +181,7 @@ class ContractsController extends Controller
             ->update([
             'volume' => $volume,
             ]);
-            
+
         }else{
             Contract::where('id', $contract->id)
             ->update(['volume' => $request->volume]);
@@ -216,20 +222,27 @@ class ContractsController extends Controller
             Contract::where('id', $contract->id)
             ->update(['end_date' => $request->end_date]);
         }
-        if ($created_by != null) {
-            Contract::where('id', $contract->id)
-            ->update([
-            'created_by' => $created_by,
-            ]);
-        }else {
-            Contract::where('id', $contract->id)
-            ->update(['created_by' => $request->created_by]);
-        }
+        // if ($created_by != null) {
+        //     Contract::where('id', $contract->id)
+        //     ->update([
+        //     'created_by' => $created_by,
+        //     ]);
+        // }else {
+        //     Contract::where('id', $contract->id)
+        //     ->update(['created_by' => $request->created_by]);
+        // }
+
+        $userid = session()->get('token')['user']['id'];
+        // dd(Carbon::now());
+        Contract::where('id', $contract->id)
+            ->update(['updated_by' => $userid,
+                      'updated_at' => Carbon::now()]);
+
 
         $files = $request->file('filename');
         if($files){
             foreach ($files as $file) {
-                $filename = time().'.'.$file->getClientOriginalName();  
+                $filename = time().'.'.$file->getClientOriginalName();
                 Contract_doc::create([
                 'filename' => $filename,
                 'contract_id' => $contract->id,
@@ -249,11 +262,12 @@ class ContractsController extends Controller
     }
     public function upammend(Request $request, Contract $contract)
     {
+        $userid = session()->get('token')['user']['id'];
         $request->validate([
           'name' => 'required',
           'client_id' => 'required',
           'cont_num' => 'required|integer|min:1',
-          'edit_by' => 'required|integer|min:1',
+        //   'edit_by' => 'required|integer|min:1',
         ]);
         $validator = Validator::make($request->all(), [
         'filename.*' => 'required|mimes:pdf,xlx,csv,doc,docx',
@@ -263,7 +277,7 @@ class ContractsController extends Controller
                     ->with('errorUpload', 'The file upload must be a file of type: pdf, xlx, csv, doc, docx.')
                     ->withInput();
         }
-        
+
          Contract::where('id', $contract->id)
                 ->update([
                 'name' => $request->name,
@@ -275,10 +289,13 @@ class ContractsController extends Controller
                 'sign_date' => $request->sign_date,
                 'start_date' => $request->start_date,
                 'end_date' => $request->end_date,
-                'created_by' => $request->edit_by,
+                // 'created_by' => $request->edit_by,
+                'updated_at' => Carbon::now(),
+                'updated_by' => $userid,
                 ]);
         $contract->getOriginal();
         Contract_history::create([
+            'changes_date' => Carbon::now(),
             'cont_id'=>$contract->getOriginal('id'),
             'name'=> $contract->getOriginal('name'),
             'cont_num' => $contract->getOriginal('cont_num'),
@@ -291,15 +308,15 @@ class ContractsController extends Controller
             'end_date' => $contract->getOriginal('end_date'),
             'created_by'=>$contract->getOriginal('created_by'),
             'created_at'=>$contract->getOriginal('created_at'),
-            'edit_by'=>$request->edit_by,
+            'edit_by'=>$userid,
             'updated_at'=> $contract->getOriginal('updated_at'),
 
-            ]);        
+            ]);
 
         $files = $request->file('filename');
         if($files){
             foreach ($files as $file) {
-                $filename = time().'.'.$file->getClientOriginalName();  
+                $filename = time().'.'.$file->getClientOriginalName();
                 Contract_doc::create([
                 'filename' => $filename,
                 'contract_id' => $contract->id,
@@ -308,7 +325,7 @@ class ContractsController extends Controller
             }
         }
         return redirect('/contracts')->with('status', 'Data Success Change!');
-      
+
     }
 
     /**
@@ -322,7 +339,7 @@ class ContractsController extends Controller
         Contract::destroy($contract->id);
         return redirect('/contracts')->with('status', 'Success Deleting Data!');
     }
-    
+
      public function destroyDoc(Contract_doc $contract_doc)
     {
         $file = Contract_doc::find($contract_doc->id);
@@ -332,5 +349,5 @@ class ContractsController extends Controller
         }
         Contract_doc::destroy($contract_doc->id);
         return response()->json(['success'=>'Delete successfully.'.$filename]);
-    } 
+    }
 }

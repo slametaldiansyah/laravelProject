@@ -20,11 +20,6 @@
                     <div class="d-flex justify-content-around">
                         <div class="form-group col-4">
                             <label for="name">Client Name</label>
-                            @php
-                            $userid = session()->get('token')['user']['id'];
-                            // dd(session()->get('token')['user']['id']);
-                            @endphp
-                            <input type="hidden" name="created_by" value="{{$userid}}">
                             <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
                                 id="name" placeholder="Enter name">
                             @error('name')

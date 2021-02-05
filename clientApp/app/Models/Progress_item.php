@@ -11,10 +11,10 @@ class Progress_item extends Model
     protected $guarded=['id'];
     public function project()
     {
-    	return $this->belongsTo('App\Models\project');
+    	return $this->belongsTo('App\Models\Project');
     }
     public function doc()
     {
-    	return $this->hasMany('App\Models\progress_doc');
+    	return $this->hasMany('App\Models\Progress_doc');
     }
 }

@@ -23,10 +23,10 @@
                     <div class="form">
                         <div class="d-flex justify-content-around">
 
-                            @php
+                            {{-- @php
                             $userid = session()->get('token')['user']['id'];
                             // $username = session()->get('token')['detail_user'][0]['fullname'];
-                            @endphp
+                            @endphp --}}
 
                             <div class="form-group col-4">
                                 <label for="name">Contract Name</label><label style="color:#dc3545;">*</label>
@@ -51,13 +51,29 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="d-flex justify-content-around">
+                        <div class="d-flex justify-content-center">
                             <div class="form-group col-4">
                                 <label for="cont_num">No. Contract</label><label style="color:#dc3545;">*</label>
                                 <input type="number" class="form-control @error('cont_num') is-invalid @enderror"
                                     id="cont_num" name="cont_num" value="{{old('cont_num')}}"
                                     placeholder="Enter No. Contract">
                                 @error('cont_num')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group col-2">
+                                <label>Type</label><label style="color:#dc3545;">*</label>
+                                <select id="type" name="type_id" class="form-control @error('type_id') is-invalid @enderror"
+                                onchange="myType()">
+                                    <option value="">--option--</option>
+                                    @foreach($types as $type)
+                                    <option id="op" value="{{$type->id}}" data-name="{{$type->name}}"
+                                        data-display="{{$type->display}}"
+                                        {{old('type_id') == $type->id ? 'selected': null}}>{{$type->name}}
+                                    </option>
+                                    @endforeach
+                                </select>
+                                @error('type_id')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
@@ -79,18 +95,21 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-center">
-                            <div class="form-group col-4">
-                                <label for="volume">Volume</label>
-                                <input type="number" class="form-control" id="volume" name="volume"
-                                    placeholder="Enter volume" value="{{old('volume')}}">
+                            <div class="row col-6">
+                                <div id="IsVolumeUnit" class="row col-12" style="display: none">
+                                    <div class="form-group col-8">
+                                        <label for="volume">Volume</label>
+                                        <input type="number" class="form-control" id="volume" name="volume"
+                                            placeholder="Enter volume" value="{{old('volume')}}">
+                                    </div>
+                                    <div class="form-group col-8">
+                                        <label for="unit">Unit</label>
+                                        <input type="text" class="form-control" id="unit" name="unit"
+                                            placeholder="ex: Mandays..." value="{{old('unit')}}">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group col-2">
-                                <label for="unit">Unit</label>
-                                <input type="text" class="form-control" id="unit" name="unit"
-                                    placeholder="ex: Mandays..." value="{{old('unit')}}">
-                            </div>
-
-                            <div class="form-group col-4">
+                            <div class="form-group col-4 ml-3">
                                 <label for="price">Price</label>
                                 <input type="number" class="form-control" value="{{old('price')}}" id="price"
                                     name="price" placeholder="Rp.">
@@ -127,14 +146,14 @@
                                     id="filename" name="filename[]" value="{{old('filename')}}" multiple>
                             </div>
                             <div class="form-group col-4"></div>
-                            <div class="form-group col-2">
+                            {{-- <div class="form-group col-2">
                                 <label for="created_by">Created by</label>
                                 <input type="number" class="form-control @error('created_by') is-invalid @enderror"
                                     id="created_by" name="created_by" value="{{$userid}}" readonly>
                                 @error('created_by')
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -191,4 +210,16 @@ $(function() {
     });
 });
 </script>
+<script>
+    function myType(){
+        var x = document.getElementById("type").value;
+        var op = document.getElementById("type");
+        var name = op.options[op.selectedIndex].getAttribute('data-name');
+        var display = op.options[op.selectedIndex].getAttribute('data-display');
+        if (x != 0) {
+        document.getElementById("IsVolumeUnit").style.display = display;
+        }
+    }
+</script>
+
 @endpush

@@ -150,7 +150,7 @@
                                 @enderror
                             </div>
                             <div class="form-group col-4"></div>
-                            <div class="form-group col-2">
+                            {{-- <div class="form-group col-2">
                                 <label for="edit_by">Edit by</label><label style="color:#dc3545;">*</label>
                                 <input type="number" class="form-control @error('edit_by') is-invalid @enderror"
                                     id="edit_by" name="edit_by" value="{{old('edit_by')}}">
@@ -159,7 +159,7 @@
                                     {{$message}}
                                 </div>
                                 @enderror
-                            </div>
+                            </div> --}}
                         </div>
                         @foreach($filename as $file)
                         <div class="d-flex justify-content-center" name="refresh-after-ajax" id="refresh-after-ajax">

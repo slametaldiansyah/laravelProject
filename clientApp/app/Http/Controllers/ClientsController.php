@@ -44,6 +44,11 @@ class ClientsController extends Controller
     public function store(Request $request)
     {
         //
+        $userid = session()->get('token')['user']['id'];
+        $request->merge([
+            'created_by' => $userid,
+        ]);
+        // dd($request->all());
           $request->validate([
           'name' => 'required',
          ]);
