@@ -49,6 +49,7 @@ class ContractsController extends Controller
         'name' => 'required',
         'client_id' => 'required',
         'cont_num' => 'required|integer|min:1',
+        'type_id' => 'required'
         ]);
         $validator = Validator::make($request->all(), [
         'filename.*' => 'required|mimes:pdf,xlx,csv,doc,docx',
@@ -101,7 +102,9 @@ class ContractsController extends Controller
     {
         $filename =$contract->doc;
         $clients= Client::all();
-        return view('contracts.v_edit', compact('contract', 'clients', 'filename'));
+        $typecek = Contract::with('type')->first();
+        $types= Type::all();
+        return view('contracts.v_edit', compact('contract', 'clients', 'filename','types','typecek'));
     }
     /**
      * Update the specified resource in storage.
@@ -120,7 +123,7 @@ class ContractsController extends Controller
                     ->with('errorUpload', 'The file upload must be a file of type: pdf, xlx, csv, doc, docx.')
                     ->withInput();
         }
-
+        $newType_id = $request->get('type_id');
         $dataOlds =Contract::all();
         foreach($dataOlds as $dataold){
             if($dataold->id==$contract->id){
@@ -133,8 +136,15 @@ class ContractsController extends Controller
                 $price = $dataold->price;
                 $start_date = $dataold->start_date;
                 $end_date = $dataold->end_date;
+                $type_id = $dataold->type_id;
                 $created_by = $dataold->created_by;
             }
+        }
+        if($newType_id != $type_id){
+            Contract::where('id', $contract->id)
+            ->update([
+                'type_id' => $newType_id,
+                ]);
         }
         if($name != null ){
             Contract::where('id', $contract->id)
@@ -258,7 +268,9 @@ class ContractsController extends Controller
         $contracts= Contract::with('doc')->get();
         $filename = $contract->doc;
         $clients= Client::all();
-        return view('contracts.v_ammend', compact('contract', 'clients', 'filename'));
+        $typecek = Contract::with('type')->first();
+        $types= Type::all();
+        return view('contracts.v_ammend', compact('contract', 'clients', 'filename','types','typecek'));
     }
     public function upammend(Request $request, Contract $contract)
     {
@@ -267,6 +279,7 @@ class ContractsController extends Controller
           'name' => 'required',
           'client_id' => 'required',
           'cont_num' => 'required|integer|min:1',
+          'type_id' => 'required',
         //   'edit_by' => 'required|integer|min:1',
         ]);
         $validator = Validator::make($request->all(), [
@@ -292,6 +305,7 @@ class ContractsController extends Controller
                 // 'created_by' => $request->edit_by,
                 'updated_at' => Carbon::now(),
                 'updated_by' => $userid,
+                'type_id' => $request->type_id,
                 ]);
         $contract->getOriginal();
         Contract_history::create([
@@ -310,6 +324,7 @@ class ContractsController extends Controller
             'created_at'=>$contract->getOriginal('created_at'),
             'edit_by'=>$userid,
             'updated_at'=> $contract->getOriginal('updated_at'),
+            'type_id'=> $contract->getOriginal('type_id'),
 
             ]);
 

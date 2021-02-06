@@ -16,6 +16,10 @@ class Contract extends Model
     {
     	return $this->belongsTo('App\Models\Client');
     }
+    public function type()
+    {
+    	return $this->belongsTo('App\Models\Type', 'type_id', 'id');
+    }
     public function doc()
     {
     	return $this->hasMany('App\Models\Contract_doc');

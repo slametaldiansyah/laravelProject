@@ -52,7 +52,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="d-flex justify-content-around">
+                        <div class="d-flex justify-content-center">
                             <div class="form-group col-4">
                                 <label for="cont_num">No. Contract</label>
                                 <input type="number" class="form-control  @error('cont_num') is-invalid @enderror"
@@ -62,10 +62,25 @@
                                 <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                             </div>
+                            <div class="form-group col-2">
+                                <label>Type</label><label style="color:#dc3545;">*</label>
+                                <select id="type" name="type_id" class="form-control @error('type_id') is-invalid @enderror"
+                                 onchange="myType()">
+                                    <option value="">--option--</option>
+                                    @foreach($types as $type)
+                                    <option id="op" value="{{$type->id}}" data-name="{{$type->name}}"
+                                        data-display="{{$type->display}}"
+                                        {{old('type_id', $contract->type_id) == $type->id ? 'selected': null}}>{{$type->name}}
+                                    </option>
+                                    @endforeach
+                                </select>
+                                @error('type_id')
+                                <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                            </div>
                             <div class="form-group col-4">
                                 <label>Contract Sign Date</label>
                                 <div class="input-group date" id="signdate" data-target-input="nearest">
-
                                     <input type="text"
                                         class="form-control  @error('sign_date') is-invalid @enderror datetimepicker-input"
                                         data-target="#signdate" name="sign_date" id="sign_date"
@@ -82,24 +97,27 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-center">
-                            <div class="form-group col-4">
-                                <label for="volume">Volume</label>
-
-                                <input type="number" class="form-control @error('volume') is-invalid @enderror"
-                                    id="volume" name="volume" value="{{old('volume', $contract->volume)}}"
-                                    placeholder="Enter volume" {{ $contract['volume'] ? 'disabled' : '' }}>
-                                @error('volume')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group col-2">
-                                <label for="unit">Unit</label>
-                                <input type="text" class="form-control @error('unit') is-invalid @enderror" id="unit"
-                                    name="unit" value="{{old('unit', $contract->unit)}}" placeholder="ex: Mandays..."
-                                    {{ $contract['unit'] ? 'disabled' : '' }}>
-                                @error('unit')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
+                            <div class="row col-6">
+                                <div id="IsVolumeUnit" class="row col-12" style="display:{{$typecek->type->display}}">
+                                    <div class="form-group col-8">
+                                        <label for="volume">Volume</label>
+                                        <input type="number" class="form-control @error('volume') is-invalid @enderror"
+                                            id="volume" name="volume" value="{{old('volume', $contract->volume)}}"
+                                            placeholder="Enter volume" {{ $contract['volume'] ? 'disabled' : '' }}>
+                                        @error('volume')
+                                        <div class="invalid-feedback">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-4">
+                                        <label for="unit">Unit</label>
+                                        <input type="text" class="form-control @error('unit') is-invalid @enderror" id="unit"
+                                            name="unit" value="{{old('unit', $contract->unit)}}" placeholder="ex: Mandays..."
+                                            {{ $contract['unit'] ? 'disabled' : '' }}>
+                                        @error('unit')
+                                        <div class="invalid-feedback">{{$message}}</div>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group col-4">
                                 <label for="paire">Price</label>
@@ -222,5 +240,17 @@ $(function() {
         format: 'YYYY-MM-DD'
     });
 });
+</script>
+<script>
+    function myType(){
+        var x = document.getElementById("type").value;
+        var op = document.getElementById("type");
+        var name = op.options[op.selectedIndex].getAttribute('data-name');
+        var display = op.options[op.selectedIndex].getAttribute('data-display');
+        console.log(op.options[op.selectedIndex].getAttribute('data-display'))
+        if (x != 0) {
+        document.getElementById("IsVolumeUnit").style.display = display;
+        }
+    }
 </script>
 @endpush

@@ -539,6 +539,7 @@ class ComposerStaticInit00f43f58bfe1e3bf2e8dbfc948095cd7
         'App\\Models\\Project_cost' => __DIR__ . '/../..' . '/app/Models/Project_cost.php',
         'App\\Models\\Project_cost_history' => __DIR__ . '/../..' . '/app/Models/Project_cost_history.php',
         'App\\Models\\Project_history' => __DIR__ . '/../..' . '/app/Models/Project_history.php',
+        'App\\Models\\Type' => __DIR__ . '/../..' . '/app/Models/Type.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',

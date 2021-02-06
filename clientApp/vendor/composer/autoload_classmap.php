@@ -37,6 +37,7 @@ return array(
     'App\\Models\\Project_cost' => $baseDir . '/app/Models/Project_cost.php',
     'App\\Models\\Project_cost_history' => $baseDir . '/app/Models/Project_cost_history.php',
     'App\\Models\\Project_history' => $baseDir . '/app/Models/Project_history.php',
+    'App\\Models\\Type' => $baseDir . '/app/Models/Type.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
