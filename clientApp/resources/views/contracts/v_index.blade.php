@@ -3,6 +3,9 @@
 @push('custom-css')
 <!-- DataTables -->
 <link rel="stylesheet" href="{{asset('assets/')}}/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+<!-- Dropdown-item -->
+<link rel="stylesheet" href="{{asset('assets/')}}/dist/css/custom/dropdowncustom.css">
+
 @endpush
 @section('content')
 <div class="container">
@@ -36,24 +39,56 @@
                             <td>{{$contract->name}}</td>
                             <td>{{$contract->client->name}}</td>
                             <td class="text-center">
-                                <a href="/contracts/{{$contract->id}}" class="btn btn-warning">
-                                    <i class="nav-icon fas fa-eye"></i>
-                                </a>
-                                <a href="/contracts/{{$contract->id}}/edit" class="btn btn-primary">
-                                    <i class="nav-icon fas fa-pen"></i>
-                                </a>
-                                <a href="/contracts/{{$contract->id}}/ammend" class="btn btn-success">
+                            <div class="btn-group">
+                                <form action="/contracts/{{$contract->id}}"
+                                    method="get"
+                                    class="d-inline">
+                                        <button class="btn btn-warning dropdown-hover">
+                                            <i class="nav-icon fas fa-eye"></i>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item">Show</a>
+                                            </div>
+                                        </button>
+                                </form>
+                            </div>
+                            <div class="btn-group">
+                                <form action="/contracts/{{$contract->id}}/edit"
+                                    method="get"
+                                    class="d-inline">
+                                        <button class="btn btn-primary dropdown-hover">
+                                            <i class="nav-icon fas fa-pen"></i>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item">Edit</a>
+                                            </div>
+                                        </button>
+                                </form>
+                            </div>
+                            <div class="btn-group">
+                                <form action="/contracts/{{$contract->id}}/ammend"
+                                    method="get"
+                                    class="d-inline">
+                                <button class="btn btn-success dropdown-hover">
                                     <i class="nav-icon fas fa-clone"></i>
-                                </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item">Ammend</a>
+                                    </div>
+                                </button>
+                                </form>
+                            </div>
+                            <div class="btn-group">
                                 <form action="/contracts/{{$contract->id}}"
                                     onsubmit="return confirm('Are you sure you want to delete?')" method="post"
-                                    class=" d-inline">
+                                    class="d-inline">
                                     @method('delete')
                                     @csrf
-                                    <button type="submit" class="btn btn-danger">
+                                    <button type="submit" class="btn btn-danger dropdown-hover">
                                         <i class="nav-icon fas fa-trash"></i>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item">Delete</a>
+                                        </div>
                                     </button>
                                 </form>
+                            </div>
                             </td>
                         </tr>
                         @endforeach

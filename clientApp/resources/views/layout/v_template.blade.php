@@ -117,6 +117,7 @@
             <section class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
+                        @include('sweetalert::alert')
                         <div class="col-sm-6">
                             <h1>@yield('title')</h1>
                         </div>

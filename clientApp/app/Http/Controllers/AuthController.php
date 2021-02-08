@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AuthController extends Controller
 {
@@ -20,40 +21,27 @@ class AuthController extends Controller
             'username' => 'required',
             'password' => 'required',
         ]);
-
-        // dd($credentials);
         if ($credentials == true) {
-            // return 'ok';
             $response = Http::post('http://127.0.0.1:8000/api/auth/login', [
                 'username' => $credentials['username'],
                 'password' => $credentials['password'],
             ]);
             $data = json_decode((string) $response->body(), true);
-            // dd($response);
-            // dd($data);
             try {
                 $data['access_token'] == true;
-                // dd($data);
                 session()->put('token', $data);
                 session()->push($data['user']['username'], $data['user']['username']);
-                // dd(session()->has('token'));
-                // Alert::success('Success', 'Slamat Datang');
-                // $role = session()->get('token')['user']['role'];
-                // return redirect()->intended('home' . $role);
+                Alert::toast('Slamat Datang', 'success');
                 return redirect()->intended('/');
             } catch (\Throwable $th) {
-                // dd($data);
                 try {
                     $data['password'] == true;
-                    // dd($data);
-                    // $alert = "'Email or Password tidak terdaftar', 'error'";
+                    Alert::toast('Username or password salah', 'error');
                     return redirect('login');
                 } catch (\Throwable $th) {
                     $data['error'] == true;
                     return redirect('login');
                 }
-                // $data['error'] == true;
-                // return redirect('login');
             }
         }
         return redirect('login');
@@ -63,7 +51,7 @@ class AuthController extends Controller
 
         if (session()->has('token')) {
             session()->flush();
-            // Alert::success('Success', 'Anda telah logout !!!');
+            Alert::toast('Anda telah logout !!!', 'success');
             return redirect()->route('login');
         } else {
             return response('Unauthorized.', 401);

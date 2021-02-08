@@ -22,7 +22,7 @@
 
         .login-page
         {
-        background: url("assets/dist/img/kantor3.jpg") no-repeat center center fixed;
+        background: url("assets/dist/img/kantor33.jpg") no-repeat center center fixed;
         background-size: cover;
         }
         .card
@@ -37,10 +37,10 @@
         .h1
         {
             /* -webkit-text-stroke: 1px rgb(0, 0, 0); */
-            text-shadow: -4px 0 rgb(32, 11, 2), 0 2px rgb(0, 0, 0), 3px 0 black, 0 -3px rgb(3, 3, 3);
-            color: #7182e0;
-            font-size: 52px;
-            font-family: sans;
+            text-shadow: -4px 0 rgb(32, 2, 17), 0 2px rgb(247, 112, 72), 3px 0 black, 0 -3px rgb(3, 3, 3);
+            color: #ec9abc;
+            font-size: 64px;
+            font-family: fantasy;
             /* lighting-color: rgb(255, 255, 255); */
             /* box-shadow: 0 0 200px rgb(0 0 0 / 2000%), 0 1px 3px rgb(0 0 0 / 2000%); */
 

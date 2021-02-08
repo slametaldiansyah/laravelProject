@@ -7,6 +7,7 @@
 <div class="login-box">
   <!-- /.login-logo -->
 
+  @include('sweetalert::alert')
   @yield('content')
 
   <!-- /.card -->

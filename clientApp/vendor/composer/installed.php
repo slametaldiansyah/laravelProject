@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'a2aef632c397264eae1595889f4e39a967d3b7ed',
+    'reference' => 'bd72357b856325025e2ba6a041021f6427d641fa',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -445,7 +445,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'a2aef632c397264eae1595889f4e39a967d3b7ed',
+      'reference' => 'bd72357b856325025e2ba6a041021f6427d641fa',
     ),
     'laravel/sail' => 
     array (
@@ -760,8 +760,8 @@
     array (
       'provided' => 
       array (
-        0 => '1.0',
-        1 => '1.0.0',
+        0 => '1.0.0',
+        1 => '1.0',
       ),
     ),
     'psr/simple-cache' => 
@@ -808,6 +808,15 @@
       array (
       ),
       'reference' => 'cd4032040a750077205918c86049aa0f43d22947',
+    ),
+    'realrashid/sweet-alert' => 
+    array (
+      'pretty_version' => 'v3.2.1',
+      'version' => '3.2.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '5c07913e4679ddc75e26d9333ee6480f46018e94',
     ),
     'rhumsaa/uuid' => 
     array (

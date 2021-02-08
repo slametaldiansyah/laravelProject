@@ -36,6 +36,7 @@ class ComposerStaticInit00f43f58bfe1e3bf2e8dbfc948095cd7
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         'ed962a97bd972bc82007176b647d4e36' => __DIR__ . '/..' . '/facade/ignition/src/helpers.php',
+        '6b34c85f7b1ad6faa15aa12109e030f2' => __DIR__ . '/..' . '/realrashid/sweet-alert/src/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -92,6 +93,7 @@ class ComposerStaticInit00f43f58bfe1e3bf2e8dbfc948095cd7
         ),
         'R' => 
         array (
+            'RealRashid\\SweetAlert\\' => 22,
             'Ramsey\\Uuid\\' => 12,
             'Ramsey\\Collection\\' => 18,
         ),
@@ -314,6 +316,10 @@ class ComposerStaticInit00f43f58bfe1e3bf2e8dbfc948095cd7
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
         ),
+        'RealRashid\\SweetAlert\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/realrashid/sweet-alert/src',
+        ),
         'Ramsey\\Uuid\\' => 
         array (
             0 => __DIR__ . '/..' . '/ramsey/uuid/src',
@@ -517,6 +523,7 @@ class ComposerStaticInit00f43f58bfe1e3bf2e8dbfc948095cd7
         'App\\Http\\Controllers\\OperationalsController' => __DIR__ . '/../..' . '/app/Http/Controllers/OperationalsController.php',
         'App\\Http\\Controllers\\Progress_statusController' => __DIR__ . '/../..' . '/app/Http/Controllers/Progress_statusController.php',
         'App\\Http\\Controllers\\ProjectsController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProjectsController.php',
+        'App\\Http\\Controllers\\Projects_statusController' => __DIR__ . '/../..' . '/app/Http/Controllers/Projects_statusController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\AuthClientAccess' => __DIR__ . '/../..' . '/app/Http/Middleware/AuthClientAccess.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
@@ -4079,6 +4086,13 @@ class ComposerStaticInit00f43f58bfe1e3bf2e8dbfc948095cd7
         'Ramsey\\Uuid\\UuidInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidInterface.php',
         'Ramsey\\Uuid\\Validator\\GenericValidator' => __DIR__ . '/..' . '/ramsey/uuid/src/Validator/GenericValidator.php',
         'Ramsey\\Uuid\\Validator\\ValidatorInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/Validator/ValidatorInterface.php',
+        'RealRashid\\SweetAlert\\Console\\PublishCommand' => __DIR__ . '/..' . '/realrashid/sweet-alert/src/Console/PublishCommand.php',
+        'RealRashid\\SweetAlert\\Facades\\Alert' => __DIR__ . '/..' . '/realrashid/sweet-alert/src/Facades/Alert.php',
+        'RealRashid\\SweetAlert\\Storage\\AlertSessionStore' => __DIR__ . '/..' . '/realrashid/sweet-alert/src/Storage/AlertSessionStore.php',
+        'RealRashid\\SweetAlert\\Storage\\SessionStore' => __DIR__ . '/..' . '/realrashid/sweet-alert/src/Storage/SessionStore.php',
+        'RealRashid\\SweetAlert\\SweetAlertServiceProvider' => __DIR__ . '/..' . '/realrashid/sweet-alert/src/SweetAlertServiceProvider.php',
+        'RealRashid\\SweetAlert\\ToSweetAlert' => __DIR__ . '/..' . '/realrashid/sweet-alert/src/ToSweetAlert.php',
+        'RealRashid\\SweetAlert\\Toaster' => __DIR__ . '/..' . '/realrashid/sweet-alert/src/Toaster.php',
         'SebastianBergmann\\CliParser\\AmbiguousOptionException' => __DIR__ . '/..' . '/sebastian/cli-parser/src/exceptions/AmbiguousOptionException.php',
         'SebastianBergmann\\CliParser\\Exception' => __DIR__ . '/..' . '/sebastian/cli-parser/src/exceptions/Exception.php',
         'SebastianBergmann\\CliParser\\OptionDoesNotAllowArgumentException' => __DIR__ . '/..' . '/sebastian/cli-parser/src/exceptions/OptionDoesNotAllowArgumentException.php',

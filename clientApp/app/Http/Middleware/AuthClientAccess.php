@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AuthClientAccess
 {
@@ -19,6 +20,7 @@ class AuthClientAccess
         if (session()->has('token')) {
             return $next($request);
         } else {
+            Alert::error('Please Login', 'Access denied');
             return redirect()->route('login');
         }
     }

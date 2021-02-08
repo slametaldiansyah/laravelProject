@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ClientsController extends Controller
 {
@@ -48,12 +49,12 @@ class ClientsController extends Controller
         $request->merge([
             'created_by' => $userid,
         ]);
-        // dd($request->all());
           $request->validate([
           'name' => 'required',
          ]);
         Client::create($request->all());
-        return redirect('/')->with('status', 'Success add Client!');
+        Alert::toast('Data Berhasil Ditambahkan !!!', 'success');
+        return redirect('/');
 
         // $client = new Client;
         // $client->name=$request->name;

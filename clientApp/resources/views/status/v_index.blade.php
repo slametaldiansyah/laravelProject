@@ -3,6 +3,8 @@
 @push('custom-css')
 <!-- DataTables -->
 <link rel="stylesheet" href="{{asset('assets/')}}/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+<!-- Dropdown-item -->
+<link rel="stylesheet" href="{{asset('assets/')}}/dist/css/custom/dropdowncustom.css">
 
 @endpush
 @section('content')
@@ -35,7 +37,45 @@
                             <td class="text-center">{{$status->id}}</td>
                             <td>{{$status->status}}</td>
                             <td class="text-center">
-                                <a href="/progress_status/{{$status->id}}" class="btn btn-warning">
+                                <div class="btn-group">
+                                    <form action="/progress_status/{{$status->id}}"
+                                        method="get"
+                                        class="d-inline">
+                                            <button class="btn btn-warning dropdown-hover">
+                                                <i class="nav-icon fas fa-eye"></i>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item">Show</a>
+                                                </div>
+                                            </button>
+                                    </form>
+                                </div>
+                                <div class="btn-group">
+                                    <form action="/progress_status/{{$status->id}}/edit"
+                                        method="get"
+                                        class="d-inline">
+                                            <button class="btn btn-primary dropdown-hover">
+                                                <i class="nav-icon fas fa-pen"></i>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item">Edit</a>
+                                                </div>
+                                            </button>
+                                    </form>
+                                </div>
+                                <div class="btn-group">
+                                    <form action="/progress_status/{{$status->id}}"
+                                        onsubmit="return confirm('Are you sure you want to delete?')" method="post"
+                                        class="d-inline">
+                                        @method('delete')
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger dropdown-hover">
+                                            <i class="nav-icon fas fa-trash"></i>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item">Delete</a>
+                                            </div>
+                                        </button>
+                                    </form>
+                                </div>
+                                {{-- <a href="/progress_status/{{$status->id}}" class="btn btn-warning">
                                     <i class="nav-icon fas fa-eye"></i>
                                 </a>
                                 <a href="/progress_status/{{$status->id}}/edit" class="btn btn-primary">
@@ -49,7 +89,7 @@
                                     <button type="submit" class="btn btn-danger">
                                         <i class="nav-icon fas fa-trash"></i>
                                     </button>
-                                </form>
+                                </form> --}}
                             </td>
                         </tr>
                         @endforeach
