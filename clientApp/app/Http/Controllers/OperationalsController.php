@@ -47,7 +47,7 @@ class OperationalsController extends Controller
      */
     public function store(Request $request)
     {
-        
+
     }
 
     /**
@@ -130,8 +130,8 @@ class OperationalsController extends Controller
                         'name_cost' => $project_cost,
                         'desc' => $request->desc[$key],
                         'total_cost' => $request->total_cost[$key],
-                        ]); 
-                    }           
+                        ]);
+                    }
                 }
             }
         }
@@ -151,7 +151,7 @@ class OperationalsController extends Controller
         $files = $request->file('filename');
         if($files){
             foreach ($files as $file) {
-                $filename = time().'.'.$file->getClientOriginalName();  
+                $filename = time().'.'.$file->getClientOriginalName();
                 Progress_doc::create([
                 'filename' => $filename,
                 'progress_item_id' => $request->progress_id,
@@ -165,6 +165,9 @@ class OperationalsController extends Controller
     }
      public function changeStatus(Request $request)
     {
+        $status_id = $request->dataOn;
+
+        //pertanyaan besok
         $getstatus = Progress_status::where('status', $request->dataOn)->first();
         $status_id = $getstatus->id;
         Progress_item::where('id', $request->id)->update([
@@ -191,5 +194,5 @@ class OperationalsController extends Controller
         }
         Progress_doc::destroy($progress_doc->id);
         return response()->json(['success'=>'Delete successfully.'.$filename]);
-    } 
+    }
 }

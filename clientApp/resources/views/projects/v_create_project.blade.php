@@ -35,8 +35,9 @@
                                             data-volume="{{$contract->volume}}" data-unit="{{$contract->unit}}"
                                             data-price="{{$contract->price}}" data-sign_date="{{$contract->sign_date}}"
                                             data-start_date="{{$contract->start_date}}"
-                                            data-end_date="{{$contract->end_date}}" @if (old('contract_id')==$contract->
-                                            id)
+                                            data-end_date="{{$contract->end_date}}"
+                                            data-type="{{$contract->type_id}}"
+                                            @if (old('contract_id')==$contract->id)
                                             selected="selected" @endif >
                                             {{$contract->name}}</option>
                                         @endforeach
@@ -75,13 +76,29 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="d-flex justify-content-around">
+                                        <div class="d-flex justify-content-center">
                                             <div class="form-group col-4">
                                                 <label for="cont_num">No. Contract</label>
                                                 <input type="number" class="form-control" id="cont_num" name="cont_num"
                                                     value="" disabled="disabled">
                                             </div>
-                                            <div class="form-group col-4">
+                                            <div class="form-group col-3">
+                                                <label>Type</label>
+                                                <select id="type" name="type_id" class="form-control @error('type_id') is-invalid @enderror"
+                                                disabled="disabled">
+                                                    <option value="">--option--</option>
+                                                    @foreach($types as $type)
+                                                    <option id="op" value="{{$type->id}}" data-name="{{$type->name}}"
+                                                        data-display="{{$type->display}}"
+                                                        {{old('type_id', $contract->type_id) == $type->id ? 'selected': null}}>{{$type->name}}
+                                                    </option>
+                                                    @endforeach
+                                                </select>
+                                                @error('type_id')
+                                                <div class="invalid-feedback">{{$message}}</div>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group col-3">
                                                 <label>Contract Sign Date</label>
                                                 <div class="input-group date">
                                                     <input type="text" class="form-control" name="sign_date"
@@ -94,15 +111,19 @@
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-center">
-                                            <div class="form-group col-4">
-                                                <label for="volume">Volume</label>
-                                                <input type="text" class="form-control" id="volume" name="volume"
-                                                    value="no data" disabled="disabled">
-                                            </div>
-                                            <div class="form-group col-2">
-                                                <label for="unit">Unit</label>
-                                                <input type="text" class="form-control" id="unit" name="unit"
-                                                    value="no data" disabled="disabled">
+                                            <div class="row col-6">
+                                                <div id="IsVolumeUnit" class="row col-12" style="display:{{$typecek->type->display}}">
+                                                    <div class="form-group col-8">
+                                                        <label for="volume">Volume</label>
+                                                        <input type="text" class="form-control" id="volume" name="volume"
+                                                            value="no data" disabled="disabled">
+                                                    </div>
+                                                    <div class="form-group col-4">
+                                                        <label for="unit">Unit</label>
+                                                        <input type="text" class="form-control" id="unit" name="unit"
+                                                            value="no data" disabled="disabled">
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="form-group col-4">
                                                 <label for="price_contract">Price</label>
@@ -220,21 +241,7 @@
                                     value="{{old('total_price')}}" id="total_price" placeholder="Rp." onchange="math()">
                             </div>
                         </div>
-                        @php
-                        $userid = session()->get('token')['user']['id'];
-                        @endphp
-                        <div class="d-flex justify-content-center">
-                            <div class="form-group col-4"></div>
-                            <div class="form-group col-2">
-                                <label for="created_by">Created by</label>
-                                {{-- <label style="color:#dc3545;">*</label> --}}
-                                <input type="number" class="form-control @error('created_by') is-invalid @enderror"
-                                    id="created_by" name="created_by" value="{{$userid}}" readonly/>
-                                @error('created_by')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                            </div>
-                        </div>
+
 
                         <div class="card-header mt-4 d-flex justify-content-center">
                             <h3 class="card-title font-weight-bold">Progress</h3>
@@ -422,6 +429,7 @@ function myFunction() {
     var sign_date = op.options[op.selectedIndex].getAttribute('data-sign_date');
     var start_date = op.options[op.selectedIndex].getAttribute('data-start_date');
     var end_date = op.options[op.selectedIndex].getAttribute('data-end_date');
+    var type = op.options[op.selectedIndex].getAttribute('data-type_id');
     console.log(op.options[op.selectedIndex].getAttribute('data-name'))
     if (x != 0) {
         document.getElementById("nocontract").style.display = "none";
@@ -436,6 +444,7 @@ function myFunction() {
         document.getElementById("start_date").value = start_date;
         document.getElementById("end_date").value = end_date;
         document.getElementById("hiddvolume").style.visibility = "visible";
+        document.getElementById('type_id').value = type_id;
     } else {
         document.getElementById("nocontract").style.display = "block";
         document.getElementById("Iscontract").style.display = "none";

@@ -10,25 +10,33 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="/contracts" class="nav-link {{ (request()->is('contracts')) ? 'active' : '' }}">
+            <a href="/contracts" class="nav-link {{ (request()->is('contracts*')) ? 'active' : '' }}">
                 <i class="nav-icon fas fa-file"></i>
                 <p>Create Contract</p>
             </a>
         </li>
         <li class="nav-item">
-            <a href="/projects" class="nav-link {{ (request()->is('projects')) ? 'active' : '' }}">
+            <a href="/projects" class="nav-link
+            {{ (request()->is('projects')) ? 'active' : '' }}
+            {{ (request()->is('projects/*')) ? 'active' : ''}}">
                 <i class="nav-icon fas fa-tasks"></i>
                 <p>Create Project</p>
             </a>
         </li>
         <li class="nav-item">
-            <a href="/operationals" class="nav-link {{ (request()->is('operationals')) ? 'active' : '' }}">
+            <a href="/operationals" class="nav-link {{ (request()->is('operationals*')) ? 'active' : '' }}">
                 <i class="nav-icon fas fa-briefcase"></i>
                 <p>Operational & Cost-POxxxx</p>
             </a>
         </li>
         <li class="nav-item">
-            <a href="/progress_status" class="nav-link {{ (request()->is('progress_status')) ? 'active' : '' }}">
+            <a href="/projects_status" class="nav-link {{ (request()->is('projects_status*')) ? 'active' : '' }}">
+                <i class="nav-icon fas fa-book"></i>
+                <p>Projects Status</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="/progress_status" class="nav-link {{ (request()->is('progress_status*')) ? 'active' : '' }}">
                 <i class="nav-icon fas fa-book"></i>
                 <p>Master Status</p>
             </a>

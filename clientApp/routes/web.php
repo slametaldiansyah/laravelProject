@@ -8,6 +8,7 @@ use App\Http\Controllers\ContractsController;
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\OperationalsController;
 use App\Http\Controllers\Progress_statusController;
+use App\Http\Controllers\Projects_statusController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,3 +50,5 @@ Route::get('/changestatus/{changestatus}', [OperationalsController::class, 'chan
 Route::get('/progress_doc/{progress_doc}', [OperationalsController::class, 'destroyDoc'])->middleware('authapi');
 
 Route::resource('/progress_status', Progress_statusController::class)->middleware('authapi');
+
+Route::resource('/projects_status', Projects_statusController::class)->middleware('authapi');

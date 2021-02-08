@@ -36,6 +36,10 @@ class Progress_statusController extends Controller
      */
     public function store(Request $request)
     {
+        $userid = session()->get('token')['user']['id'];
+        $request->merge([
+            'created_by' => $userid,
+        ]);
         Progress_status::create($request->all());
         return redirect('/progress_status')->with('status', 'Success create status');
     }
@@ -60,7 +64,7 @@ class Progress_statusController extends Controller
     public function edit(Progress_status $progress_status)
     {
         //return $progress_status;
-        
+
         return view('status.v_edit', compact('progress_status'));
     }
 
@@ -73,7 +77,14 @@ class Progress_statusController extends Controller
      */
     public function update(Request $request, Progress_status $progress_status)
     {
-        Progress_status::where('id', $progress_status->id)->update(['status' => $request->status]);
+        $userid = session()->get('token')['user']['id'];
+        $request->merge([
+            'updated_by' => $userid,
+        ]);
+        Progress_status::where('id', $progress_status->id)->update([
+            'status' => $request->status,
+            'updated_by' => $request->updated_by,
+            ]);
         return redirect('/progress_status')->with('status', 'Success update status!');
     }
 

@@ -14,7 +14,7 @@
             <div class="card-header">
                 <h3 class="card-title">Create Status</h3>
             </div>
-            <form method="post" action="/status">
+            <form method="post" action="/progress_status">
                 @csrf
                 <div class="card-body">
                     <div class="d-flex justify-content-around">
