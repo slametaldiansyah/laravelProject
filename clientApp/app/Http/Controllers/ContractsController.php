@@ -34,7 +34,8 @@ class ContractsController extends Controller
     {
         $clients= Client::all();
         $types= Type::all();
-        return view('contracts.v_create_contract', compact('clients','types'));
+        $typecek = Contract::with('type')->first();
+        return view('contracts.v_create_contract', compact('clients','types','typecek'));
     }
 
     /**
@@ -58,7 +59,18 @@ class ContractsController extends Controller
                      return back()
                             ->with('errorUpload', 'The file upload must be a file of type: pdf, xlx, csv, doc, docx.')
                             ->withInput();
-              }
+        }
+        $types= Type::where('id', $request->type_id)->first();
+        if($types->required != 0){
+            $request->validate([
+                'volume' => 'required',
+                'unit' => 'required',
+                ]);
+        }else{
+            return back()
+            ->with('errorUpload', 'The file upload must be a file of type: pdf, xlx, csv, doc, docx.')
+            ->withInput();
+        }
 
         $userid = session()->get('token')['user']['id'];
         $request->merge([

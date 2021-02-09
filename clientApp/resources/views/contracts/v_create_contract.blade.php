@@ -96,16 +96,22 @@
                         </div>
                         <div class="d-flex justify-content-center">
                             <div class="row col-6">
-                                <div id="IsVolumeUnit" class="row col-12" style="display: none">
+                                <div id="IsVolumeUnit" class="row col-12" style="display: none" value="{{old('type')}}">
                                     <div class="form-group col-8">
                                         <label for="volume">Volume</label>
-                                        <input type="number" class="form-control" id="volume" name="volume"
+                                        <input type="number" class="form-control @error('volume') is-invalid @enderror" id="volume" name="volume"
                                             placeholder="Enter volume" value="{{old('volume')}}">
-                                    </div>
+                                            @error('volume')
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </div>
                                     <div class="form-group col-8">
                                         <label for="unit">Unit</label>
-                                        <input type="text" class="form-control" id="unit" name="unit"
+                                        <input type="text" class="form-control @error('unit') is-invalid @enderror" id="unit" name="unit"
                                             placeholder="ex: Mandays..." value="{{old('unit')}}">
+                                            @error('unit')
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
                                     </div>
                                 </div>
                             </div>
@@ -208,9 +214,19 @@ $(function() {
         useCurrent: false,
         format: 'YYYY-MM-DD'
     });
+    // $('#IsVolumeUnit').datetimepicker({
+    //     useCurrent: false,
+    //     format: 'YYYY-MM-DD'
+    // });
 });
 </script>
 <script>
+
+    //cek if type value true
+    if (document.getElementById("type").value == true) {
+        document.getElementById("IsVolumeUnit").style.display = "block";
+    }
+
     function myType(){
         var x = document.getElementById("type").value;
         var op = document.getElementById("type");
