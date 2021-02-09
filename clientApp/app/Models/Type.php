@@ -9,4 +9,8 @@ class Type extends Model
 {
     use HasFactory;
     protected $fillable=['name','display'];
+
+    public function contract(){
+        $this->hasMany('App\Models\Contract');
+    }
 }

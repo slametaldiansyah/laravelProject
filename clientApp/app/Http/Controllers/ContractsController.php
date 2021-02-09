@@ -66,10 +66,6 @@ class ContractsController extends Controller
                 'volume' => 'required',
                 'unit' => 'required',
                 ]);
-        }else{
-            return back()
-            ->with('errorUpload', 'The file upload must be a file of type: pdf, xlx, csv, doc, docx.')
-            ->withInput();
         }
 
         $userid = session()->get('token')['user']['id'];

@@ -36,7 +36,7 @@
                                             data-price="{{$contract->price}}" data-sign_date="{{$contract->sign_date}}"
                                             data-start_date="{{$contract->start_date}}"
                                             data-end_date="{{$contract->end_date}}"
-                                            data-type="{{$contract->type_id}}"
+                                            data-type_id="{{$contract->type_id}}" data-type_display="{{$contract->type->display}}"
                                             @if (old('contract_id')==$contract->id)
                                             selected="selected" @endif >
                                             {{$contract->name}}</option>
@@ -84,7 +84,7 @@
                                             </div>
                                             <div class="form-group col-3">
                                                 <label>Type</label>
-                                                <select id="type" name="type_id" class="form-control @error('type_id') is-invalid @enderror"
+                                                <select id="type_id" name="type_id" class="form-control @error('type_id') is-invalid @enderror"
                                                 disabled="disabled">
                                                     <option value="">--option--</option>
                                                     @foreach($types as $type)
@@ -181,15 +181,18 @@
                         </div>
                         <div class="d-flex justify-content-around">
                             <div class="form-group col-4">
-                                <label>Project Sign Date</label>
+                                <label for="po_sign_date">Project Sign Date</label>
                                 <div class="input-group date" id="po_sign_date" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input"
+                                    <input type="text" class="form-control @error('po_sign_date') is-invalid @enderror datetimepicker-input"
                                         data-target="#po_sign_date" name="po_sign_date" placeholder="dd/mm/yyyy"
                                         value="{{old('po_sign_date')}}" />
                                     <div class="input-group-append" data-target="#po_sign_date"
                                         data-toggle="datetimepicker">
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                     </div>
+                                    @error('po_sign_date')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group col-4">
@@ -200,27 +203,33 @@
                         </div>
                         <div class="d-flex justify-content-around">
                             <div class="form-group col-4">
-                                <label>Start Date</label>
+                                <label for="po_start_date">Start Date</label>
                                 <div class="input-group date" id="po_start_date" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input"
+                                    <input type="text" class="form-control @error('po_start_date') is-invalid @enderror datetimepicker-input"
                                         data-target="#po_start_date" name="po_start_date"
                                         value="{{old('po_start_date')}}" placeholder="dd/mm/yyyy" />
                                     <div class="input-group-append" data-target="#po_start_date"
                                         data-toggle="datetimepicker">
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                     </div>
+                                    @error('po_start_date')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group col-4">
-                                <label>End Date</label>
+                                <label for="po_end_date">End Date</label>
                                 <div class="input-group date" id="po_end_date" data-target-input="nearest">
-                                    <input type="text" name="po_end_date" class="form-control datetimepicker-input"
+                                    <input type="text" name="po_end_date" class="form-control @error('po_end_date') is-invalid @enderror datetimepicker-input"
                                         data-target="#po_end_date" value="{{old('po_end_date')}}"
                                         placeholder="dd/mm/yyyy" />
                                     <div class="input-group-append" data-target="#po_end_date"
                                         data-toggle="datetimepicker">
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                     </div>
+                                    @error('po_end_date')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -429,8 +438,9 @@ function myFunction() {
     var sign_date = op.options[op.selectedIndex].getAttribute('data-sign_date');
     var start_date = op.options[op.selectedIndex].getAttribute('data-start_date');
     var end_date = op.options[op.selectedIndex].getAttribute('data-end_date');
-    var type = op.options[op.selectedIndex].getAttribute('data-type_id');
-    console.log(op.options[op.selectedIndex].getAttribute('data-name'))
+    var type_id = op.options[op.selectedIndex].getAttribute('data-type_id');
+    var type_display = op.options[op.selectedIndex].getAttribute('data-type_display');
+    console.log(op.options[op.selectedIndex].getAttribute('data-type_display'))
     if (x != 0) {
         document.getElementById("nocontract").style.display = "none";
         document.getElementById("Iscontract").style.display = "block";
@@ -443,8 +453,13 @@ function myFunction() {
         document.getElementById("price_contract").value = price;
         document.getElementById("start_date").value = start_date;
         document.getElementById("end_date").value = end_date;
-        document.getElementById("hiddvolume").style.visibility = "visible";
         document.getElementById('type_id').value = type_id;
+        document.getElementById("IsVolumeUnit").style.display = type_display;
+        if (type_display == "block") {
+            document.getElementById("hiddvolume").style.visibility = "visible";
+        }else{
+            document.getElementById("hiddvolume").style.visibility = "hidden";
+        }
     } else {
         document.getElementById("nocontract").style.display = "block";
         document.getElementById("Iscontract").style.display = "none";

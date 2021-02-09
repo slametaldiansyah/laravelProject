@@ -38,7 +38,7 @@ class ProjectsController extends Controller
     public function create()
     {
        $contracts= Contract::all();
-       $project= Project::with('contract')->get();
+       $project= Project::with('contract','contract.type')->get();
        $clients= Client::all();
        $types = Type::all();
        $typecek = Contract::with('type')->first();
@@ -53,12 +53,22 @@ class ProjectsController extends Controller
      */
     public function store(Request $request)
     {
+        $contract_id = $request->contract_id;
+        $dateCek = Contract::where('id', $contract_id)->first();
+        $sign_dateOld = $dateCek->start_date;
+        $request->merge([
+            'sign_dateContract' => $sign_dateOld,
+            ]);
        $request->validate([
           'name' => 'required',
           'no_po' => 'nullable|integer|min:1',
           'volume_use' => 'nullable|integer|min:1',
+          'po_sign_date' => 'nullable|date|after_or_equal:sign_dateContract',
+          'po_start_date' => 'nullable|date|after_or_equal:po_sign_date',
+          'po_end_date' => 'nullable|date|after_or_equal:po_start_date',
         //   'created_by' => 'required',
        ]);
+
 
        $userid = session()->get('token')['user']['id'];
        $request->merge([
@@ -99,7 +109,7 @@ class ProjectsController extends Controller
               }
        }
 
-       $contract_id = $request->contract_id;
+
        $dataAllVolume=Project::where('contract_id', $contract_id)->get();
        $totalAllVolume= $dataAllVolume->sum('volume_use');
        $volume_use = $request->volume_use ;

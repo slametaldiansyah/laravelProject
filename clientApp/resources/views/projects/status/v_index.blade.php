@@ -23,6 +23,7 @@
                     <thead>
                         <tr>
                             <th width="30px">No</th>
+                            <th class="text-center">PO Name</th>
                             <th class="text-center">PO Number</th>
                             <th class="text-center">Status</th>
                             {{-- <th class="text-center">Action</th> --}}
@@ -32,8 +33,10 @@
                         @foreach($projects_status as $status)
                         <tr>
                             <th class="text-center" width="30px">{{$loop->iteration}}</th>
-                            <td class="text-center">{{$status->no_po}}</td>
-                            <td class="text-center">{{$status->status}}%</td>
+                            <td>{{$status->name}}</td>
+                            <td class="text-right">{{$status->no_po}}</td>
+                            <td class="text-center text-bold {{$status->status <= 30 ? 'text-red' :
+                            ($status->status <= 99 ? 'text-blue' : 'text-green') }}" style="font-size: 130%"> {{$status->status}}%</td>
                             {{-- <td class="text-center">
                                 <a href="/progress_status/{{$status->id}}" class="btn btn-warning">
                                     <i class="nav-icon fas fa-eye"></i>
@@ -57,6 +60,7 @@
                     <tfoot>
                         <tr>
                             <th width="30px">No</th>
+                            <th class="text-center">PO Name</th>
                             <th class="text-center">PO Number</th>
                             <th class="text-center">Status</th>
                             {{-- <th class="text-center"> Action</th> --}}
