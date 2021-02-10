@@ -558,6 +558,7 @@ class ComposerStaticInit00f43f58bfe1e3bf2e8dbfc948095cd7
         'App\\Models\\Contract' => __DIR__ . '/../..' . '/app/Models/Contract.php',
         'App\\Models\\Contract_doc' => __DIR__ . '/../..' . '/app/Models/Contract_doc.php',
         'App\\Models\\Contract_history' => __DIR__ . '/../..' . '/app/Models/Contract_history.php',
+        'App\\Models\\Invoice' => __DIR__ . '/../..' . '/app/Models/Invoice.php',
         'App\\Models\\Progress_doc' => __DIR__ . '/../..' . '/app/Models/Progress_doc.php',
         'App\\Models\\Progress_item' => __DIR__ . '/../..' . '/app/Models/Progress_item.php',
         'App\\Models\\Progress_item_history' => __DIR__ . '/../..' . '/app/Models/Progress_item_history.php',

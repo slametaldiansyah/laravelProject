@@ -30,6 +30,12 @@
             </a>
         </li>
         <li class="nav-item">
+            <a href="/payments" class="nav-link {{ (request()->is('payments*')) ? 'active' : '' }}">
+                <i class="nav-icon fas fa-credit-card"></i>
+                <p>Payments</p>
+            </a>
+        </li>
+        <li class="nav-item">
             <a href="/projects_status" class="nav-link {{ (request()->is('projects_status*')) ? 'active' : '' }}">
                 <i class="nav-icon fas fa-book"></i>
                 <p>Projects Status</p>

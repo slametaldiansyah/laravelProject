@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Contract;
 use App\Models\Clients;
+use App\Models\Invoice;
 use App\Models\Project;
 use App\Models\Progress_doc;
 use App\Models\Progress_item;
@@ -165,15 +166,33 @@ class OperationalsController extends Controller
     }
      public function changeStatus(Request $request)
     {
-        $status_id = $request->dataOn;
-
-        //pertanyaan besok
-        $getstatus = Progress_status::where('status', $request->dataOn)->first();
-        $status_id = $getstatus->id;
-        Progress_item::where('id', $request->id)->update([
-        'status_id' => $status_id,
-        ]);
-        return response()->json(['success'=>'User status change successfully.'.$status_id]);
+        if ($request->name == "invoice_status")
+            {
+            $userid = session()->get('token')['user']['id'];
+            $getProgress = Progress_item::where('id', $request->id)->first();
+            $getAmout = Project::where('id', $getProgress->project_id)->first();
+            $sumAmount = ($getProgress->payment_percentage / 100) * $getAmout->total_price ;
+            Invoice::create([
+                'project_id' => $getProgress->project_id,
+                'progress_item_id' => $request->id,
+                'user_trigger' => $userid,
+                'amount_total' => $sumAmount,
+            ]);
+            $getstatus = Progress_status::where('status', $request->dataOn)->first();
+            $status_id = $getstatus->id;
+            Progress_item::where('id', $request->id)->update([
+            'invoice_status_id' => $status_id,
+            ]);
+        } elseif
+        ($request->name == "status"){
+            $getstatus = Progress_status::where('status', $request->dataOn)->first();
+            $status_id = $getstatus->id;
+            Progress_item::where('id', $request->id)->update([
+            'status_id' => $status_id,
+            ]);
+        }
+        // $status_id = $request->name;
+        return response()->json(['success'=>'User status change successfully.'.$sumAmount]);
     }
     /**
      * Remove the specified resource from storage.

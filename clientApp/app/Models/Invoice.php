@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Progress_item extends Model
+class Invoice extends Model
 {
     use HasFactory;
     protected $guarded=['id'];
@@ -13,12 +13,8 @@ class Progress_item extends Model
     {
     	return $this->belongsTo('App\Models\Project');
     }
-    public function doc()
+    public function progress_item()
     {
-    	return $this->hasMany('App\Models\Progress_doc');
-    }
-    public function invoice()
-    {
-    	return $this->hasMany('App\Models\Invoice');
+    	return $this->belongsTo('App\Models\Progress_item');
     }
 }

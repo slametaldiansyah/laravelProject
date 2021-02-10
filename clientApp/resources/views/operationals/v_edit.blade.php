@@ -48,14 +48,20 @@
                                     <td class="text-center">
                                         @if(!$progress_item->status_id)
                                         <meta name="csrf-token" content="{{ csrf_token() }}">
-                                        <a name="status" data-id="{{$progress_item->id}}" data-on="Completed"
+                                        <a data-name="status" data-id="{{$progress_item->id}}" data-on="Completed"
                                             data-off="inProgress" class="btn btn-primary changeStatus">inProgress</a>
                                         @else
                                         <i class="nav-icon fas fa-check text-success"></i>
                                         @endif
                                     </td>
                                     <td class="text-center">
+                                        @if (!$progress_item->invoice_status_id)
+                                        <meta name="csrf-token" content="{{ csrf_token() }}">
+                                        <a data-name="invoice_status" data-id="{{$progress_item->id}}" data-on="Completed"
+                                            data-off="inProgress" class="btn btn-primary changeStatus">inProgress</a>
+                                        @else
                                         <i class="nav-icon fas fa-check text-success"></i>
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach
@@ -287,6 +293,7 @@ $(function() {
 <script>
 $(".changeStatus").click(function() {
     var id = $(this).data("id");
+    var name = $(this).data("name");
     var dataOn = $(this).data("on");
     var dataOff = $(this).data("off");
     var token = $("meta[name='csrf-token']").attr("content");
@@ -296,13 +303,20 @@ $(".changeStatus").click(function() {
             url: "/changestatus/" + id,
             type: 'get',
             data: {
+                "name": name,
                 "id": id,
                 "dataOn": dataOn,
                 "_token": token,
             },
             success: function(data) {
-                console.log(data.success)
+                console.log(data.success);
                 location.reload();
+            },
+            error: function(xhr, data, error) {
+                console.log(xhr.responseText);
+                console.log(xhr.statusText);
+                console.log(textStatus);
+                console.log(data);
             }
         });
     }

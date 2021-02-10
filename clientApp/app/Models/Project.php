@@ -24,6 +24,10 @@ class Project extends Model
     {
     	return $this->hasMany('App\Models\Project_cost');
     }
+    public function invoice()
+    {
+    	return $this->hasMany('App\Models\Invoice');
+    }
 
     // public function getall()
     // {

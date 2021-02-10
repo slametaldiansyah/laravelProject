@@ -7,6 +7,7 @@ use App\Http\Controllers\ContractsController;
 //use App\Http\Controllers\Contract_docController;
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\OperationalsController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Progress_statusController;
 use App\Http\Controllers\Projects_statusController;
 
@@ -52,3 +53,5 @@ Route::get('/progress_doc/{progress_doc}', [OperationalsController::class, 'dest
 Route::resource('/progress_status', Progress_statusController::class)->middleware('authapi');
 
 Route::resource('/projects_status', Projects_statusController::class)->middleware('authapi');
+
+Route::resource('/payments', PaymentController::class)->middleware('authapi');
