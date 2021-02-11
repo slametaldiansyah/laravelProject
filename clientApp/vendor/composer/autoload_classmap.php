@@ -13,6 +13,7 @@ return array(
     'App\\Http\\Controllers\\ContractsController' => $baseDir . '/app/Http/Controllers/ContractsController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\OperationalsController' => $baseDir . '/app/Http/Controllers/OperationalsController.php',
+    'App\\Http\\Controllers\\PaymentController' => $baseDir . '/app/Http/Controllers/PaymentController.php',
     'App\\Http\\Controllers\\Progress_statusController' => $baseDir . '/app/Http/Controllers/Progress_statusController.php',
     'App\\Http\\Controllers\\ProjectsController' => $baseDir . '/app/Http/Controllers/ProjectsController.php',
     'App\\Http\\Controllers\\Projects_statusController' => $baseDir . '/app/Http/Controllers/Projects_statusController.php',

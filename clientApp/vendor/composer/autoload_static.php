@@ -541,6 +541,7 @@ class ComposerStaticInit00f43f58bfe1e3bf2e8dbfc948095cd7
         'App\\Http\\Controllers\\ContractsController' => __DIR__ . '/../..' . '/app/Http/Controllers/ContractsController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\OperationalsController' => __DIR__ . '/../..' . '/app/Http/Controllers/OperationalsController.php',
+        'App\\Http\\Controllers\\PaymentController' => __DIR__ . '/../..' . '/app/Http/Controllers/PaymentController.php',
         'App\\Http\\Controllers\\Progress_statusController' => __DIR__ . '/../..' . '/app/Http/Controllers/Progress_statusController.php',
         'App\\Http\\Controllers\\ProjectsController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProjectsController.php',
         'App\\Http\\Controllers\\Projects_statusController' => __DIR__ . '/../..' . '/app/Http/Controllers/Projects_statusController.php',
