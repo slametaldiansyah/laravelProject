@@ -13,7 +13,7 @@ class CreateProofOfInvoicePayment extends Migration
      */
     public function up()
     {
-        Schema::create('proof_of_invoice_payment', function (Blueprint $table) {
+        Schema::create('proof_of_invoice_payments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('actual_payment_id')->constrained('actual_payments')->onDelete('cascade')->onUpdate('cascade');
             $table->bigInteger('user_upload');
@@ -29,6 +29,6 @@ class CreateProofOfInvoicePayment extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('proof_of_invoice_payment');
+        Schema::dropIfExists('proof_of_invoice_payments');
     }
 }

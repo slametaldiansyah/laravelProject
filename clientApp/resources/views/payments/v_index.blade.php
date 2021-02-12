@@ -19,6 +19,13 @@
             {{ session('status') }}
         </div>
         @endif
+        {{-- @if (session('status'))
+        <script>
+        $( document ).ready(
+            swal("{{ session('status') }}")
+        });
+        </script>
+        @endif --}}
         <div class="card">
             {{-- <div class="card-header text-right">
                 <a href="/progress_status/create" class="btn btn-primary">Create Project</a>
@@ -44,7 +51,11 @@
                             <td class="text-right">{{$invoice->project->no_po}}</td>
                             <td class="text-left">{{$invoice->project->contract->client->name}}</td>
                             <td class="text-left">{{$invoice->progress_item->name_progress}}</td>
-                            <td class="text-left">@rupiah($invoice->amount_total)</td>
+                            @if ($invoice->actualPay != null)
+                                <td class="text-left">@rupiah($invoice->amount_total - $invoice->actualPay)</td>
+                            @else
+                                <td class="text-left">@rupiah($invoice->amount_total)</td>
+                            @endif
                             <td class="text-center">
                                 <div class="btn-group">
                                     <button type="button" id="paymentCreate"
@@ -149,7 +160,7 @@ $(function() {
             format: 'YYYY-MM-DD',
         });
     });
-    </script>
+</script>
 <!-- Rupiah -->
 <script type="text/javascript">
     var rupiah = document.getElementById('rupiah');

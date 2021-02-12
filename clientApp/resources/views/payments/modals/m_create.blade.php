@@ -2,7 +2,7 @@
 <div class="modal fade" id="payment-create">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
-            <form id="myFormIdCreate" role="form" action="/payments" method="post">
+            <form id="myFormIdCreate" role="form" action="/payments" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header">
                 <h4 class="modal-title">Create Payment</h4>

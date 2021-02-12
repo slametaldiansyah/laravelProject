@@ -17,4 +17,8 @@ class Invoice extends Model
     {
     	return $this->belongsTo('App\Models\Progress_item');
     }
+    public function actual_payment()
+    {
+        return $this->hasMany('App\Models\Actual_payment');
+    }
 }
