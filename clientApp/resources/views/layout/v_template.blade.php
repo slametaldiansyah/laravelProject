@@ -21,6 +21,8 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('assets/')}}/plugins/fontawesome-free/css/all.min.css">
+      <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="{{asset('assets/')}}/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     @stack('custom-css')
     <!-- daterange picker -->
     <!-- <link rel="stylesheet" href="{{asset('assets/')}}/plugins/daterangepicker/daterangepicker.css"> -->
@@ -35,11 +37,12 @@
 
 </head>
 
-<body class="hold-transition sidebar-mini">
+{{-- <body class="hold-transition sidebar-mini text-sm"> --}}
+    <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <!-- Site wrapper -->
     <div class="wrapper bg-light">
         <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <nav class="main-header navbar navbar-expand navbar-dark navbar-primary">
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -75,7 +78,16 @@
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user (optional) -->
-                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="user-panel mt-4 pb-3 mb-3 d-flex">
+                    <div class="image">
+                        {{-- <img src="{{asset('assets/')}}/dist/img/user2-160x160.jpg" class="img-circle elevation-2"
+                            alt="User Image"> --}}
+                    </div>
+                    <div class="info">
+                        {{-- <a href="{{ route('profile')}}" class="d-block">{{$username}}</a> --}}
+                    </div>
+                </div>
+                <div class="user-panel mt-4 pb-3 mb-3 d-flex">
                     <div class="image">
                         <img src="{{asset('assets/')}}/dist/img/user2-160x160.jpg" class="img-circle elevation-2"
                             alt="User Image">
@@ -112,7 +124,7 @@
         </aside>
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper ">
+        <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <div class="container-fluid">
@@ -150,6 +162,8 @@
     <script src="{{asset('assets/')}}/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="{{asset('assets/')}}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="{{asset('assets/')}}/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     @stack('custom-js')
 
     <!-- Select2 -->

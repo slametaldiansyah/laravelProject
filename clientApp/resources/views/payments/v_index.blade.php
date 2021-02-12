@@ -8,7 +8,7 @@
 <!-- Tempusdominus Bootstrap 4 -->
 <link rel="stylesheet"
     href="{{asset('assets/')}}/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-
+    <link href="{{asset('assets/')}}/costume/tablecostume.css" rel="stylesheet">
 @endpush
 @section('content')
 <div class="container">
@@ -65,7 +65,7 @@
                                     data-client="{{$invoice->project->contract->client->name}}"
                                     data-progress_name="{{$invoice->progress_item->name_progress}}"
                                     data-amount="@rupiah($invoice->amount_total)"
-                                     class="btn btn-secondary dropdown-hover" data-toggle="modal" data-target="#payment-create"
+                                     class="btn btn-primary btn-sm dropdown-hover" data-toggle="modal" data-target="#payment-create"
                                     onclick="createData(this)">
                                             <i class="nav-icon fas fa-credit-card"></i>
                                             <div class="dropdown-menu">
@@ -109,7 +109,17 @@
 @push('custom-script')
 <script>
 $(function() {
-    $("#example1").DataTable();
+    $("#example1").DataTable({
+        // processing: true,
+        // serverSide: true,
+        language: {
+            searchPlaceholder: "Search",
+            search : '<i class="fas fa-search"></i>',
+            'paginate': {
+                'previous': '<a>Back <i class="fas fa-hand-point-left"></i></a>',
+                'next': '<a><i class="fas fa-hand-point-right"></i> Next</a>',
+                }}
+    });
 });
 </script>
 <script>

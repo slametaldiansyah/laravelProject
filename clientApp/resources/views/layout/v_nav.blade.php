@@ -1,8 +1,9 @@
 <nav class="mt-2">
-    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+    <ul class="nav nav-pills nav-sidebar flex-column text-sm" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-        <li class="nav-header">MENU</li>
+        <li>
+               <li class="nav-header">MENU</li>
         <li class="nav-item">
             <a href="/" class="nav-link {{ (request()->is('/')) ? 'active' : '' }}">
                 <i class="nav-icon fas fa-users"></i>
@@ -41,20 +42,35 @@
                 <p>Projects Status</p>
             </a>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a href="/progress_status" class="nav-link {{ (request()->is('progress_status*')) ? 'active' : '' }}">
                 <i class="nav-icon fas fa-book"></i>
                 <p>Master Status</p>
             </a>
+        </li> --}}
+        <li class="nav-header">Configuration</li>
+        <li class="nav-item">
+            <a href="/progress_status" class="nav-link {{ (request()->is('progress_status*')) ? 'active' : '' }}">
+                <i class="nav-icon fas fa-cog"></i>
+                <p>Master Status</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="/types" class="nav-link {{ (request()->is('type*')) ? 'active' : '' }}">
+                <i class="nav-icon fas fa-cog"></i>
+                <p>Type Contract</p>
+            </a>
         </li>
 
-        <li class="col-2 nav-item fixed-bottom">
+
+        <li class="mt-4 nav-item">
             <a href="{{ route('logout') }}" class="nav-link">
                 <i class="nav-icon fas fa-sign-out-alt"></i>
                 <p class="text">Logout</p>
             </a>
         </li>
     </ul>
-    </li>
-    </ul>
+
+        {{-- </li>
+    </ul> --}}
 </nav>
