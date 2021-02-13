@@ -12,4 +12,10 @@ class TypeController extends Controller
         $types = Type::all();
         return view('config.typecontract.v_index', compact('types'));
     }
+
+    public function destroy(Type $type)
+    {
+        Type::destroy($type->id);
+        return redirect('/types')->with('status', 'Success Deleting Data!');
+    }
 }
