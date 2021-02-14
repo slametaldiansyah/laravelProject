@@ -6,9 +6,6 @@
 <!-- Dropdown-item -->
 <link rel="stylesheet" href="{{asset('assets/')}}/dist/css/custom/dropdowncustom.css">
 
-<!-- Bootstrap Switch -->
-{{-- <script src="{{asset('assets/')}}/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script> --}}
-
 <link href="{{asset('assets/')}}/costume/tablecostume.css" rel="stylesheet">
 <link href="{{asset('assets/')}}/costume/switchcostume.css" rel="stylesheet">
 
@@ -24,7 +21,7 @@
         @endif
         <div class="card">
             <div class="card-header text-right">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#type-create">Create config type</button>
+                <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#type-create">Create config type</button>
             </div>
             <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped">

@@ -3,6 +3,8 @@
 @push('custom-css')
 <!-- DataTables -->
 <link rel="stylesheet" href="{{asset('assets/')}}/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+<!-- Table custome -->
+<link href="{{asset('assets/')}}/costume/tablecostume.css" rel="stylesheet">
 
 @endpush
 @section('content')
@@ -79,8 +81,18 @@
 @endpush
 @push('custom-script')
 <script>
-$(function() {
-    $("#example1").DataTable();
-});
+    $(function() {
+        $("#example1").DataTable({
+            // processing: true,
+            // serverSide: true,
+            language: {
+                searchPlaceholder: "Search",
+                search : '<i class="fas fa-search"></i>',
+                'paginate': {
+                    'previous': '<a>Back <i class="fas fa-hand-point-left"></i></a>',
+                    'next': '<a><i class="fas fa-hand-point-right"></i> Next</a>',
+                    }}
+        });
+    });
 </script>
 @endpush
