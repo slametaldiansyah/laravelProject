@@ -76,7 +76,7 @@
                             <div class="card-header">
                             <h3 class="card-title">Create</h3>
                             </div>
-                            <form id="myFormId" role="form" action="/projects" method="post">
+                            {{-- <form id="myFormId" role="form" action="/projects" method="post"> --}}
                             <div class="card-body">
                             <!-- Date range -->
                             <div class="form-group">

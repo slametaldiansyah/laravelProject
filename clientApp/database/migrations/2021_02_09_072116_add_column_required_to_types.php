@@ -15,7 +15,7 @@ class AddColumnRequiredToTypes extends Migration
     {
         Schema::table('types', function (Blueprint $table) {
             $table->string('display')->default('block')->change();
-            $table->boolean('required')->default(1);
+            $table->boolean('required')->nullable();
             $table->bigInteger('created_by')->nullable();
             $table->bigInteger('updated_by')->nullable();
         });
@@ -30,7 +30,7 @@ class AddColumnRequiredToTypes extends Migration
     {
         Schema::table('types', function (Blueprint $table) {
             $table->string('display')->default('block')->change();
-            $table->boolean('required')->default(1);
+            $table->boolean('required')->nullable();
             $table->bigInteger('created_by')->nullable();
             $table->bigInteger('updated_by')->nullable();
         });

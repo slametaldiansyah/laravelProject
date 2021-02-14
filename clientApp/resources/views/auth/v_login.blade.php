@@ -4,7 +4,7 @@
 @section('content')
 <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="#" class="h1"><b>Login</b>Client</a>
+      <a href="#" class="h1"><b>Tracking</b></a>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Sign in to start your session</p>

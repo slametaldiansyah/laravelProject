@@ -1,12 +1,11 @@
 <!-- Extra large modal -->
-<div class="modal fade" id="type-edit">
+<div class="modal fade" id="type-create">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
-            <form id="myFormIdEdit" role="form" action="/types/update" method="post" enctype="multipart/form-data">
-                @method('patch')
+            <form id="myFormIdCreate" role="form" action="/types" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header">
-                <h4 class="modal-title">Edit Type</h4>
+                <h4 class="modal-title">Create Type</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -32,8 +31,8 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text"><i class="fa fa-edit"></i></div>
                                     </div>
-                                    <input id="id" name="id" type="hidden">
-                                    <input id="name" name="name" type="text"
+                                    {{-- <input name="id" type="hidden"> --}}
+                                    <input name="name" type="text"
                                     class="form-control text-right text-bold @error('name') is-invalid @enderror" value="{{old('name')}}">
                                     @error('name')
                                     <div class="invalid-feedback">
@@ -48,7 +47,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text"><i class="fa fa-edit"></i></div>
                                     </div>
-                                    <input id="display" name="display" type="text"
+                                    <input name="display" type="text"
                                     class="form-control text-right text-bold @error('display') is-invalid @enderror" value="{{old('display')}}">
                                     @error('display')
                                     <div class="invalid-feedback">
@@ -62,8 +61,8 @@
                                 <div class="row">
                                 <label class="mr-3 ml-2">Required :</label>
                                 <div class="ml-3 custom-control custom-switch custom-switch-md">
-                                  <input name="required" type="checkbox" class="custom-control-input" id="customSwitch1">
-                                  <label class="custom-control-label" for="customSwitch1"></label>
+                                  <input name="required" type="checkbox" class="custom-control-input" id="customSwitch2">
+                                  <label class="custom-control-label" for="customSwitch2"></label>
                                 </div>
                                 </div>
                               </div>
@@ -78,7 +77,7 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button id="myButtonID" type="submit" class="btn btn-primary">Save changes</button>
+                    <button id="myButtonIDCreate" type="submit" class="btn btn-primary">Save changes</button>
                 </div>
             </form>
       </div>

@@ -11,7 +11,13 @@ class Type extends Model
     use HasFactory;
     use SoftDeletes;
     protected $guarded=['id'];
-    protected $fillable=['name','display'];
+    protected $fillable=[
+        'name',
+        'display',
+        'required',
+        'updated_by',
+        'created_by',
+    ];
 
     public function contract(){
         $this->hasMany('App\Models\Contract');

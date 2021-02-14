@@ -10,103 +10,8 @@
 {{-- <script src="{{asset('assets/')}}/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script> --}}
 
 <link href="{{asset('assets/')}}/costume/tablecostume.css" rel="stylesheet">
-<style type="text/css">
-/* for lg */
+<link href="{{asset('assets/')}}/costume/switchcostume.css" rel="stylesheet">
 
-/* for sm */
-
-.custom-switch.custom-switch-sm .custom-control-label {
-    padding-left: 1rem;
-    padding-bottom: 1rem;
-}
-
-.custom-switch.custom-switch-sm .custom-control-label::before {
-    height: 1rem;
-    width: calc(1rem + 0.75rem);
-    border-radius: 2rem;
-}
-
-.custom-switch.custom-switch-sm .custom-control-label::after {
-    width: calc(1rem - 4px);
-    height: calc(1rem - 4px);
-    border-radius: calc(1rem - (1rem / 2));
-}
-
-.custom-switch.custom-switch-sm .custom-control-input:checked ~ .custom-control-label::after {
-    transform: translateX(calc(1rem - 0.25rem));
-}
-
-/* for md */
-
-.custom-switch.custom-switch-md .custom-control-label {
-    padding-left: 2rem;
-    padding-bottom: 1.5rem;
-}
-
-.custom-switch.custom-switch-md .custom-control-label::before {
-    height: 1.5rem;
-    width: calc(2rem + 0.75rem);
-    border-radius: 3rem;
-}
-
-.custom-switch.custom-switch-md .custom-control-label::after {
-    width: calc(1.5rem - 4px);
-    height: calc(1.5rem - 4px);
-    border-radius: calc(2rem - (1.5rem / 2));
-}
-
-.custom-switch.custom-switch-md .custom-control-input:checked ~ .custom-control-label::after {
-    transform: translateX(calc(1.5rem - 0.25rem));
-}
-
-/* for lg */
-
-.custom-switch.custom-switch-lg .custom-control-label {
-    padding-left: 3rem;
-    padding-bottom: 2rem;
-}
-
-.custom-switch.custom-switch-lg .custom-control-label::before {
-    height: 2rem;
-    width: calc(3rem + 0.75rem);
-    border-radius: 4rem;
-}
-
-.custom-switch.custom-switch-lg .custom-control-label::after {
-    width: calc(2rem - 4px);
-    height: calc(2rem - 4px);
-    border-radius: calc(3rem - (2rem / 2));
-}
-
-.custom-switch.custom-switch-lg .custom-control-input:checked ~ .custom-control-label::after {
-    transform: translateX(calc(2rem - 0.25rem));
-}
-
-/* for xl */
-
-.custom-switch.custom-switch-xl .custom-control-label {
-    padding-left: 4rem;
-    padding-bottom: 2.5rem;
-}
-
-.custom-switch.custom-switch-xl .custom-control-label::before {
-    height: 2.5rem;
-    width: calc(4rem + 0.75rem);
-    border-radius: 5rem;
-}
-
-.custom-switch.custom-switch-xl .custom-control-label::after {
-    width: calc(2.5rem - 4px);
-    height: calc(2.5rem - 4px);
-    border-radius: calc(4rem - (2.5rem / 2));
-}
-
-.custom-switch.custom-switch-xl .custom-control-input:checked ~ .custom-control-label::after {
-    transform: translateX(calc(2.5rem - 0.25rem));
-}
-
-
-</style>
 @endpush
 @section('content')
 <div class="container">
@@ -119,7 +24,7 @@
         @endif
         <div class="card">
             <div class="card-header text-right">
-                <a href="/progress_status/create" class="btn btn-primary">Create config type</a>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#type-create">Create config type</button>
             </div>
             <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped">
@@ -147,17 +52,18 @@
                             </td>
                             <td class="text-center">
                                 <div class="btn-group">
-                                    <button id="typeEdit" class="btn btn-primary btn-sm dropdown-hover" data-toggle="modal" data-target="#type-edit">
+                                    <button id="typeEdit" class="btn btn-primary btn-sm dropdown-hover"
+                                    data-toggle="modal" data-target="#type-edit"
+                                    data-id="{{$type->id}}"
+                                    data-name="{{$type->name}}"
+                                    data-display="{{$type->display}}"
+                                    data-required="{{$type->required}}"
+                                    onclick="editData(this)">
                                         <i class="nav-icon fas fa-pen"></i>
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item">Edit</a>
                                         </div>
                                     </button>
-                                    {{-- <form action="/types/{{$type->id}}/edit"
-                                        method="get"
-                                        class="d-inline">
-
-                                    </form> --}}
                                 </div>
                                 <div class="btn-group">
                                     <form action="/types/{{$type->id}}"
@@ -191,6 +97,7 @@
         </div>
     </div>
 </div>
+@include('config.typecontract.modal.m_create')
 @include('config.typecontract.modal.m_edit')
 @endsection
 @push('custom-js')
@@ -214,5 +121,56 @@
                     }}
         });
     });
-    </script>
+    function editData(e) {
+        var typeId = $(e).data("id");
+        var name = $(e).data("name");
+        var display = $(e).data("display");
+        var required = $(e).data("required");
+        if (e != 0) {
+        document.getElementById("id").value = typeId;
+        document.getElementById("name").value = name;
+        document.getElementById("display").value = display;
+        if (required == 1) {
+            document.getElementById("customSwitch1").checked = true;
+        } else {
+            document.getElementById("customSwitch1").checked = false;
+        }
+    // alert(required);
+    }else{
+    alert("no");
+    // console.log("")
+    }
+    }
+    //button submit
+    $('#myFormIdEdit').submit(function() {
+        $("#myButtonID", this)
+            .html("Please Wait...")
+            .attr('disabled', 'disabled');
+        return true;
+    });
+    //Create
+    $('#myFormIdCreate').submit(function() {
+        $("#myButtonIDCreate", this)
+            .html("Please Wait...")
+            .attr('disabled', 'disabled');
+        return true;
+    });
+</script>
+<script type="text/javascript">
+    @if (count($errors) > 0)
+        $('#type-create').modal('show');
+    @endif
+</script>
+<script type="application/javascript">
+    $('input[type="checkbox"]').on('customSwitch1', function (e, data) {
+        var $element = $(data.el),
+            value = data.value;
+        $element.attr('value', value);
+    });
+    $('input[type="checkbox"]').on('customSwitch2', function (e, data) {
+        var $element = $(data.el),
+            value = data.value;
+        $element.attr('value', value);
+    });
+</script>
 @endpush

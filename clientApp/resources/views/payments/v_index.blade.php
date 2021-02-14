@@ -9,6 +9,8 @@
 <link rel="stylesheet"
     href="{{asset('assets/')}}/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <link href="{{asset('assets/')}}/costume/tablecostume.css" rel="stylesheet">
+  <!-- Toastr -->
+  <link rel="stylesheet" href="{{asset('assets/')}}/plugins/toastr/toastr.min.css">
 @endpush
 @section('content')
 <div class="container">
@@ -104,6 +106,8 @@
 <script src="{{asset('assets/')}}/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 <!-- bs-custom-file-input -->
 <script src="{{asset('assets/')}}/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<!-- Toastr -->
+<script src="{{asset('assets/')}}/plugins/toastr/toastr.min.js"></script>
 
 @endpush
 @push('custom-script')
@@ -134,7 +138,7 @@ $(function() {
     @if (count($errors) > 0)
         $('#payment-create').modal('show');
     @endif
-    </script>
+</script>
 <script type="text/javascript">
     $(document).ready(function () {
       bsCustomFileInput.init();
@@ -191,48 +195,4 @@ $(function() {
         return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
     }
 </script>
-{{-- <script>
-    function myFunction() {
-        var x = document.getElementById("contra").value;
-        var op = document.getElementById("contra");
-        var name = op.options[op.selectedIndex].getAttribute('data-name');
-        var cont_num = op.options[op.selectedIndex].getAttribute('data-cont_num');
-        var client_id = op.options[op.selectedIndex].getAttribute('data-client_id');
-        var volume = op.options[op.selectedIndex].getAttribute('data-volume');
-        var unit = op.options[op.selectedIndex].getAttribute('data-unit');
-        var price = op.options[op.selectedIndex].getAttribute('data-price');
-        var sign_date = op.options[op.selectedIndex].getAttribute('data-sign_date');
-        var start_date = op.options[op.selectedIndex].getAttribute('data-start_date');
-        var end_date = op.options[op.selectedIndex].getAttribute('data-end_date');
-        var type_id = op.options[op.selectedIndex].getAttribute('data-type_id');
-        var type_display = op.options[op.selectedIndex].getAttribute('data-type_display');
-        console.log(op.options[op.selectedIndex].getAttribute('data-type_display'))
-        if (x != 0) {
-            document.getElementById("nocontract").style.display = "none";
-            document.getElementById("Iscontract").style.display = "block";
-            document.getElementById("name_contract").value = name;
-            document.getElementById('client_id').value = client_id;
-            document.getElementById("cont_num").value = cont_num;
-            document.getElementById("sign_date").value = sign_date;
-            document.getElementById("volume").value = volume;
-            document.getElementById("unit").value = unit;
-            document.getElementById("price_contract").value = price;
-            document.getElementById("start_date").value = start_date;
-            document.getElementById("end_date").value = end_date;
-            document.getElementById('type_id').value = type_id;
-            document.getElementById("IsVolumeUnit").style.display = type_display;
-            if (type_display == "block") {
-                document.getElementById("hiddvolume").style.visibility = "visible";
-            }else{
-                document.getElementById("hiddvolume").style.visibility = "hidden";
-            }
-        } else {
-            document.getElementById("nocontract").style.display = "block";
-            document.getElementById("Iscontract").style.display = "none";
-            document.getElementById("volume_use").value = "";
-            document.getElementById("hiddvolume").style.visibility = "hidden";
-        }
-    }
-    myFunction();
-    </script> --}}
 @endpush
