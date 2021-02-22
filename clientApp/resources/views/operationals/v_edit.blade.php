@@ -24,7 +24,7 @@
                                 <tr>
                                     <th class="text-center">Operational & Progress</th>
                                     <th class="text-center">Progress</th>
-                                    <th class="text-center">Invoicing</th>
+                                    <th class="text-center">Payment</th>
                                 </tr>
                                 <tr>
                                     @foreach($progress_items as $progress_item)

@@ -54,9 +54,17 @@
                             <div class="form-group">
                                 <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text"><strong> Amount :</strong></span>
+                                    <span class="input-group-text"><strong>Total Amount :</strong></span>
                                 </div>
                                 <input id="amountInvoice" name="amountInvoice" type="text" class="form-control text-right text-bold" value="{{old('amountInvoice')}}" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><strong> Amount need to be paid :</strong></span>
+                                </div>
+                                <input id="amountNeedToBePaid" name="amountInvoice" type="text" class="form-control text-right text-bold" value="{{old('amountInvoice')}}" readonly>
                                 </div>
                             </div>
                             <!-- /.form group -->

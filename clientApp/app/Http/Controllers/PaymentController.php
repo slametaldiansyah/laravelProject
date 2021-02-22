@@ -26,6 +26,20 @@ class PaymentController extends Controller
             }])->get();
         return view('payments.v_index', compact('invoiceList','clients'));
     }
+    public function show(Request $request)
+    {
+        // $id = $request->id;
+        $getAcc = Actual_payment::with('invoice.project',
+                                        'invoice.progress_item',
+                                        'invoice.project.contract.client')
+                                        ->where('invoice_id', $request->id)->get();
+        return response()->json(['dataPay' => $getAcc]);
+        // return response()->json(['msg'=>'Updated Successfully',
+        // 'dataid' => $id,
+        // 'success'=>true]);
+        // return datatables()->of($users)
+        //       ->make(true);
+    }
 
     public function store(Request $request)
     {
@@ -38,7 +52,7 @@ class PaymentController extends Controller
         ]);
           $request->validate([
           'amount' => 'required',
-          'payment_date' => 'required|date',
+          'payment_date' => 'required|date|before_or_equal:today',
           'filename' => 'required'
          ]);
          $id = Actual_payment::create($request->all())->id;

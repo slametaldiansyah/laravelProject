@@ -21,7 +21,7 @@
                                 <tr>
                                     <th class="text-center">Operational & Progress</th>
                                     <th class="text-center">Progress</th>
-                                    <th class="text-center">Invoicing</th>
+                                    <th class="text-center">Payment</th>
                                 </tr>
                                 <tr>
                                     @foreach($progress_items as $progress_item)
@@ -53,7 +53,13 @@
                                         @endif
                                     </td>
                                     <td class="text-center">
+                                        @if (!$progress_item->invoice_status_id)
+                                        <meta name="csrf-token" content="{{ csrf_token() }}">
+                                        <a data-name="invoice_status" data-id="{{$progress_item->id}}" data-on="Completed"
+                                            data-off="inProgress" class="btn btn-primary changeStatus">inProgress</a>
+                                        @else
                                         <i class="nav-icon fas fa-check text-success"></i>
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach

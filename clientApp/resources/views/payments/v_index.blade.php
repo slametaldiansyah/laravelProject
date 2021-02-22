@@ -41,7 +41,7 @@
                             <th class="text-center">PO Number</th>
                             <th class="text-center">Client</th>
                             <th class="text-center">Progress</th>
-                            <th class="text-center">Amount</th>
+                            <th class="text-center">Amount need to be paid</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
@@ -54,9 +54,9 @@
                             <td class="text-left">{{$invoice->project->contract->client->name}}</td>
                             <td class="text-left">{{$invoice->progress_item->name_progress}}</td>
                             @if ($invoice->actualPay != null)
-                                <td class="text-left">@rupiah($invoice->amount_total - $invoice->actualPay)</td>
+                                <td class="text-right">@rupiah($invoice->amount_total - $invoice->actualPay)</td>
                             @else
-                                <td class="text-left">@rupiah($invoice->amount_total)</td>
+                                <td class="text-right">@rupiah($invoice->amount_total)</td>
                             @endif
                             <td class="text-center">
                                 <div class="btn-group">
@@ -67,11 +67,25 @@
                                     data-client="{{$invoice->project->contract->client->name}}"
                                     data-progress_name="{{$invoice->progress_item->name_progress}}"
                                     data-amount="@rupiah($invoice->amount_total)"
+                                    data-amountntbp="@rupiah($invoice->amount_total - $invoice->actualPay)"
                                      class="btn btn-primary btn-sm dropdown-hover" data-toggle="modal" data-target="#payment-create"
                                     onclick="createData(this)">
                                             <i class="nav-icon fas fa-credit-card"></i>
                                             <div class="dropdown-menu">
                                                 <a class="dropdown-item">Payment</a>
+                                            </div>
+                                      </button>
+                                </div>
+
+                                <div class="btn-group">
+                                    <meta name="csrf-token" content="{{ csrf_token() }}">
+                                    <button type="button" data-id="{{$invoice->id}}"
+                                     class="btn btn-warning btn-sm dropdown-hover"
+                                     data-toggle="modal" data-target="#payment-show"
+                                     onclick="showData(this)">
+                                            <i class="nav-icon fas fa-eye"></i>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item">Show</a>
                                             </div>
                                       </button>
                                 </div>
@@ -96,6 +110,7 @@
     </div>
 </div>
 @include('payments.modals.m_create')
+@include('payments.modals.m_show')
 @endsection
 @push('custom-js')
 <!-- DataTables -->
@@ -152,6 +167,7 @@ $(function() {
     var client = $(e).data("client");
     var progressName = $(e).data("progress_name");
     var amount = $(e).data("amount");
+    var amountntbp = $(e).data("amountntbp");
     if (e != 0) {
         document.getElementById("invoice_id").value = invoiceId;
         document.getElementById("po_name").value = projectName;
@@ -159,12 +175,88 @@ $(function() {
         document.getElementById("client").value = client;
         document.getElementById("progress_name").value = progressName;
         document.getElementById("amountInvoice").value = amount;
-    // alert(projectName);
+        document.getElementById("amountNeedToBePaid").value = amountntbp;
+    // alert(amountntbp);
     }else{
     alert("no");
     // console.log("")
     }
    }
+</script>
+<script>
+    function showData(e) {
+        var id = $(e).data("id");
+        var token = $("meta[name='csrf-token']").attr("content");
+        // console.log(id);
+        if (e) {
+            $('#aldiTable').DataTable({
+            processing: true,
+            // serverSide: true,
+            destroy: true,
+            responsive: true,
+            ajax: {
+            url: "/payments/show" + id,
+            type: 'get',
+            data: {
+                "id": id,
+                "_token": token,},
+                // "dataSrc": "dataPay"
+                dataSrc: function(json) {
+                    if ( json.dataPay === null ) {
+                        return [];
+                    }
+                    // var amount = JSON.parse(json.dataPay);
+                    // console.console.log(json.dataPay);
+                    return json.dataPay;
+                    }
+            },
+            columns: [
+                    {data: "id"},
+                    {data: "invoice.progress_item.name_progress"},
+                    {data: "invoice.project.contract.client.name"},
+                    {data: "invoice.project.name"},
+                    {data: "amount",
+                    render: $.fn.dataTable.render.number( ',', '.', 0, 'Rp. ' )
+                    },
+                    {data: "invoice.amount_total",
+                    render: $.fn.dataTable.render.number( ',', '.', 0, 'Rp. ' )
+                    },
+                    {data: "payment_date"},
+                    ],
+                    "columnDefs": [
+                        {
+                        "data": null
+                        }   
+                    ],
+            language: {
+                search : '<i class="fas fa-search"></i>',
+                searchPlaceholder: "Search",
+                'paginate': {
+                    'previous': '<a>Back <i class="fas fa-hand-point-left"></i></a>',
+                    'next': '<a><i class="fas fa-hand-point-right"></i> Next</a>',
+                    }}
+        });
+        // $.ajax({
+        //     url: "/payments/show" + id,
+        //     type: 'get',
+        //     data: {
+        //         "id": id,
+        //         "_token": token,
+        //     },
+        //     success: function(data) {
+        //         console.log(data.dataid);
+        //         var $tr = $('<tr>').append(
+        //             $('<td>').text(data.dataid),
+        //             // $('<td>').text(item.content),
+        //             // $('<td>').text(item.UID)
+        //             ); //.appendTo('#records_table');
+        //         console.log($tr.wrap('<p>').html());
+        //     }
+        // });
+        // console.log("masuk");
+        // $(this).parents('tr').remove();
+    }
+    }
 </script>
 <script>
     $(function() {
@@ -195,4 +287,5 @@ $(function() {
         return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
     }
 </script>
+
 @endpush
