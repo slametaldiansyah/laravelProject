@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\ContractsController;
+use App\Http\Controllers\EmailConfigController;
 //use App\Http\Controllers\Contract_docController;
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\OperationalsController;
@@ -57,5 +58,6 @@ Route::resource('/projects_status', Projects_statusController::class)->middlewar
 
 Route::resource('/payments', PaymentController::class)->middleware('authapi');
 
-//type
+//type //config
 Route::resource('/types', TypeController::class)->middleware('authapi');
+Route::resource('/email_configuration', EmailConfigController::class);

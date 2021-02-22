@@ -61,6 +61,12 @@
                 <p>Type Contract</p>
             </a>
         </li>
+        <li class="nav-item">
+            <a href="/email_configuration" class="nav-link {{ (request()->is('email_configuration*')) ? 'active' : '' }}">
+                <i class="nav-icon fas fa-envelope"></i>
+                <p>Email Configuration</p>
+            </a>
+        </li>
 
 
         <li class="mt-4 nav-item">
