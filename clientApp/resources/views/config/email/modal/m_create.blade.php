@@ -29,43 +29,74 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <div id="form-wrapper" class="form-group mb-4">
-                                            {{-- <form action="/p/quote.php" method="GET"> --}}
+                                            {{-- <form id="myform"> --}}
                                                 <label class="mr-3 ml-2">Frequency :</label>
                                                 <div id="debt-amount-slider">
-                                                    <input type="radio" name="debt-amount" id="1" value="1" required>
+                                                    <input type="radio" name="debt-amount" data-name="hour" id="1" value="1" required>
                                                     <label for="1" data-debt-amount="Hour"></label>
-                                                    <input type="radio" name="debt-amount" id="2" value="2" required>
+                                                    <input type="radio" name="debt-amount" data-name="day" id="2" value="2" required>
                                                     <label for="2" data-debt-amount="Day"></label>
-                                                    <input type="radio" name="debt-amount" id="3" value="3" required>
+                                                    <input type="radio" name="debt-amount" data-name="week" id="3" value="3" required>
                                                     <label for="3" data-debt-amount="Week"></label>
-                                                    <input type="radio" name="debt-amount" id="4" value="4" required>
+                                                    <input type="radio" name="debt-amount" data-name="month" id="4" value="4" required>
                                                     <label for="4" data-debt-amount="Month"></label>
-                                                    <input type="radio" name="debt-amount" id="5" value="5" required>
+                                                    <input type="radio" name="debt-amount" data-name="year" id="5" value="5" required>
                                                     <label for="5" data-debt-amount="Year"></label>
                                                     <div id="debt-amount-pos"></div>
                                                 </div>
                                             {{-- </form> --}}
                                         </div>
                                         <br>
-                                        <div class="row">
-                                            {{-- <div class="col-12"> --}}
-                                                <div class="col-3">
-                                                         {{-- <div class="form-group"> --}}
-                                                         <label class="mr-3 ml-2">Day :</label>
-                                                </div>
-                                                <div class="col-8">
-                                            <select id="day" class="form-control ml-4 select2 dayNum" style="width: 50%;">
-                                              {{-- <option selected="selected">Alabama</option>
-                                              <option>Alaska</option>
-                                              <option>California</option>
-                                              <option>Delaware</option>
-                                              <option>Tennessee</option>
-                                              <option>Texas</option>
-                                              <option>Washington</option> --}}
+
+                                        {{-- Hour --}}
+                                        <div class="row" id="hourInput" style="display:none;">
+                                            <div class="col-3">
+                                                     <label class="mr-3 ml-2">Hour :</label>
+                                            </div>
+                                        <div class="col-8">
+                                            <select id="hour" name="hourSelect" class="form-control ml-4 select2 hourNum" style="width: 50%;">
                                             </select>
                                         </div>
-                                          {{-- </div> --}}
-                                        {{-- </div> --}}
+                                        </div>
+                                        {{-- Day --}}
+                                        <div class="row" id="dayInput" style="display:none;">
+                                                <div class="col-3">
+                                                         <label class="mr-3 ml-2">Day :</label>
+                                                </div>
+                                            <div class="col-8">
+                                                <select id="day" name="daySelect" class="form-control ml-4 select2 dayNum" style="width: 50%;">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        {{-- Week --}}
+                                        <div class="row" id="weekInput" style="display:none;">
+                                            <div class="col-3">
+                                                     <label class="mr-3 ml-2">Week :</label>
+                                            </div>
+                                        <div class="col-8">
+                                            <select id="week" name="weekSelect" class="form-control ml-4 select2 weekNum" style="width: 50%;">
+                                            </select>
+                                        </div>
+                                        </div>
+                                        {{-- Month --}}
+                                        <div class="row" id="monthInput" style="display:none;">
+                                            <div class="col-3">
+                                                     <label class="mr-3 ml-2">Month :</label>
+                                            </div>
+                                        <div class="col-8">
+                                            <select id="month" name="monthSelect" class="form-control ml-4 select2 monthNum" style="width: 50%;">
+                                            </select>
+                                        </div>
+                                        </div>
+                                        {{-- Year --}}
+                                        <div class="row" id="yearInput" style="display:none;">
+                                            <div class="col-3">
+                                                     <label class="mr-3 ml-2">Year :</label>
+                                            </div>
+                                        <div class="col-8">
+                                            <select id="year" name="yearSelect" class="form-control ml-4 select2 yearNum" style="width: 50%;">
+                                            </select>
+                                        </div>
                                         </div>
 
                                     </div>

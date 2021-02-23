@@ -175,13 +175,87 @@
 
 <!-- Selected -->
 <script>
+
+$(document).on('change', 'input:radio', function () {
+    if (this.value == 1) {
+        // alert($(this).data("name"));
+        document.getElementById("hourInput").style.display = "block";
+        document.getElementById("dayInput").style.display = "none";
+        document.getElementById("weekInput").style.display = "none";
+        document.getElementById("monthInput").style.display = "none";
+        document.getElementById("yearInput").style.display = "none";
+    }else if(this.value == 2){
+        document.getElementById("hourInput").style.display = "none";
+        document.getElementById("dayInput").style.display = "block";
+        document.getElementById("weekInput").style.display = "none";
+        document.getElementById("monthInput").style.display = "none";
+        document.getElementById("yearInput").style.display = "none";
+    }else if(this.value == 3){
+        document.getElementById("hourInput").style.display = "none";
+        document.getElementById("dayInput").style.display = "none";
+        document.getElementById("weekInput").style.display = "block";
+        document.getElementById("monthInput").style.display = "none";
+        document.getElementById("yearInput").style.display = "none";
+    }else if(this.value == 4){
+        document.getElementById("hourInput").style.display = "none";
+        document.getElementById("dayInput").style.display = "none";
+        document.getElementById("weekInput").style.display = "none";
+        document.getElementById("monthInput").style.display = "block";
+        document.getElementById("yearInput").style.display = "none";
+    }else if(this.value == 5){
+        document.getElementById("hourInput").style.display = "none";
+        document.getElementById("dayInput").style.display = "none";
+        document.getElementById("weekInput").style.display = "none";
+        document.getElementById("monthInput").style.display = "none";
+        document.getElementById("yearInput").style.display = "block";
+    }else{
+        document.getElementById("hourInput").style.display = "none";
+        document.getElementById("dayInput").style.display = "none";
+        document.getElementById("weekInput").style.display = "none";
+        document.getElementById("monthInput").style.display = "none";
+        document.getElementById("yearInput").style.display = "none";
+    }
+    });
+    //hour
+    $(function(){
+    var $select = $(".hourNum");
+    var n = ' Hour';
+    for (i=1;i<=24;i++){
+        $select.append($('<option></option>').val(i).html(i+n))
+    }
+    });
+    //day
     $(function(){
     var $select = $(".dayNum");
     var n = ' Day';
     for (i=1;i<=31;i++){
         $select.append($('<option></option>').val(i).html(i+n))
     }
-});
+    });
+    //week
+    $(function(){
+    var $select = $(".weekNum");
+    var n = ' Week';
+    for (i=1;i<=4;i++){
+        $select.append($('<option></option>').val(i).html(i+n))
+    }
+    });
+    //month
+    $(function(){
+    var $select = $(".monthNum");
+    var n = ' Month';
+    for (i=1;i<=12;i++){
+        $select.append($('<option></option>').val(i).html(i+n))
+    }
+    });
+    //year
+    $(function(){
+    var $select = $(".yearNum");
+    var n = ' Year';
+    for (i=1;i<=5;i++){
+        $select.append($('<option></option>').val(i).html(i+n))
+    }
+    });
 </script>
 
 @endpush
