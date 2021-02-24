@@ -101,7 +101,15 @@
 
                                     </div>
                                     <div class="col-6">
-
+                                        <div class="form-group">
+                                            <label>Multiple</label>
+                                            <select id="select2bs4" class="select2bs4" multiple="multiple" data-placeholder="Select Email"
+                                                    style="width: 100%;">
+                                                {{-- @foreach ($types as $type)
+                                                    <option value="{{$type->id}}">{{$type->id}}</option>
+                                                @endforeach --}}
+                                            </select>
+                                          </div>
                                     </div>
                                         <!-- /.card-body -->
                                 </div>

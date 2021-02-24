@@ -121,6 +121,11 @@ class AuthController extends Controller
     {
         return response()->json(auth()->user());
     }
+    public function getEmailList()
+    {
+        $email = Detail_user::select('email')->get();
+        return response()->json($email);
+    }
 
     /**
      * Get the token array structure.

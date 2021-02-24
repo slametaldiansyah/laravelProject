@@ -10,6 +10,9 @@
 <link href="{{asset('assets/')}}/costume/switchcostume.css" rel="stylesheet">
 <!-- RadioButton -->
 <link href="{{asset('assets/')}}/costume/radiobuttoncostume.css" rel="stylesheet">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="{{asset('assets/')}}/plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="{{asset('assets/')}}/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 
 @endpush
 @section('content')
@@ -24,6 +27,7 @@
         <div class="card">
             <div class="card-header text-right">
                 <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#type-create">Create config Email</button>
+                {{-- <a href="email_configuration/show">cek</a> --}}
             </div>
             <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped">
@@ -103,6 +107,8 @@
 <!-- DataTables -->
 <script src="{{asset('assets/')}}/plugins/datatables/jquery.dataTables.js"></script>
 <script src="{{asset('assets/')}}/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+<!-- Select2 -->
+<script src="{{asset('assets/')}}/plugins/select2/js/select2.full.min.js"></script>
 @endpush
 @push('custom-script')
 
@@ -175,7 +181,6 @@
 
 <!-- Selected -->
 <script>
-
 $(document).on('change', 'input:radio', function () {
     if (this.value == 1) {
         // alert($(this).data("name"));
@@ -256,6 +261,30 @@ $(document).on('change', 'input:radio', function () {
         $select.append($('<option></option>').val(i).html(i+n))
     }
     });
+
+    //Multiple Select
+    $(".select2bs4").select2({
+    tags: true,
+    multiple: true,
+    });
+    $.ajax({
+        type: "GET",
+        url: "email_configuration/show",
+        cache: "false",
+        dataType: "json",
+        success: function(data) {
+        //   console.log(data.data[0]['email']);
+            // Get select
+            var select = document.getElementById('select2bs4');
+            // Add options
+            for (var i in data.data) {
+                $(select).append('<option value=' + data.data[i]['email'] + '>' + data.data[i]['email'] + '</option>');
+            }
+        // Set selected value
+        // $(select).val(data[1]);
+    }
+    });
 </script>
+
 
 @endpush

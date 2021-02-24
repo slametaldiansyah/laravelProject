@@ -60,4 +60,6 @@ Route::resource('/payments', PaymentController::class)->middleware('authapi');
 
 //type //config
 Route::resource('/types', TypeController::class)->middleware('authapi');
-Route::resource('/email_configuration', EmailConfigController::class);
+//email
+Route::resource('/email_configuration', EmailConfigController::class)->middleware('authapi');
+// Route::get('/email_configuration/getListEmail', [OperationalsController::class, 'getListEmail'])->middleware('authapi');
