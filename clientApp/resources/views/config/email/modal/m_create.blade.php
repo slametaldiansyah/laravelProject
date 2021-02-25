@@ -1,8 +1,8 @@
 <!-- Extra large modal -->
-<div class="modal fade" id="type-create">
+<div class="modal fade" id="email-create">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-            <form id="myFormIdCreate" role="form" action="/types" method="post" enctype="multipart/form-data">
+            <form id="myFormIdCreate" role="form" action="/email_configuration" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header">
                 <h4 class="modal-title">Create Email Configuration</h4>
@@ -24,7 +24,11 @@
                                     {{-- <div class="card-body">
                                         <input type="checkbox" name="my-checkbox">
                                     </div> --}}
-
+                                    @error('frequency')
+                                    <div class="invalid-feedback">
+                                        {{$message}}
+                                    </div>
+                                    @enderror
 
                                 <div class="row">
                                     <div class="col-6">
@@ -32,29 +36,31 @@
                                             {{-- <form id="myform"> --}}
                                                 <label class="mr-3 ml-2">Frequency :</label>
                                                 <div id="debt-amount-slider">
-                                                    <input type="radio" name="debt-amount" data-name="hour" id="1" value="1" required>
+                                                    <input type="radio" name="frequency" data-name="hour" id="1" value="1" >
                                                     <label for="1" data-debt-amount="Hour"></label>
-                                                    <input type="radio" name="debt-amount" data-name="day" id="2" value="2" required>
+                                                    <input type="radio" name="frequency" data-name="day" id="2" value="2" >
                                                     <label for="2" data-debt-amount="Day"></label>
-                                                    <input type="radio" name="debt-amount" data-name="week" id="3" value="3" required>
+                                                    <input type="radio" name="frequency" data-name="week" id="3" value="3" >
                                                     <label for="3" data-debt-amount="Week"></label>
-                                                    <input type="radio" name="debt-amount" data-name="month" id="4" value="4" required>
+                                                    <input type="radio" name="frequency" data-name="month" id="4" value="4" >
                                                     <label for="4" data-debt-amount="Month"></label>
-                                                    <input type="radio" name="debt-amount" data-name="year" id="5" value="5" required>
+                                                    <input type="radio" name="frequency" data-name="year" id="5" value="5" >
                                                     <label for="5" data-debt-amount="Year"></label>
                                                     <div id="debt-amount-pos"></div>
+
                                                 </div>
                                             {{-- </form> --}}
                                         </div>
                                         <br>
 
                                         {{-- Hour --}}
+                                        <div class="form-grup">
                                         <div class="row" id="hourInput" style="display:none;">
                                             <div class="col-3">
                                                      <label class="mr-3 ml-2">Hour :</label>
                                             </div>
                                         <div class="col-8">
-                                            <select id="hour" name="hourSelect" class="form-control ml-4 select2 hourNum" style="width: 50%;">
+                                            <select id="hour" name="1" class="form-control ml-4 select2 hourNum" style="width: 50%;">
                                             </select>
                                         </div>
                                         </div>
@@ -64,7 +70,7 @@
                                                          <label class="mr-3 ml-2">Day :</label>
                                                 </div>
                                             <div class="col-8">
-                                                <select id="day" name="daySelect" class="form-control ml-4 select2 dayNum" style="width: 50%;">
+                                                <select id="day" name="2" class="form-control ml-4 select2 dayNum" style="width: 50%;">
                                                 </select>
                                             </div>
                                         </div>
@@ -74,7 +80,7 @@
                                                      <label class="mr-3 ml-2">Week :</label>
                                             </div>
                                         <div class="col-8">
-                                            <select id="week" name="weekSelect" class="form-control ml-4 select2 weekNum" style="width: 50%;">
+                                            <select id="week" name="3" class="form-control ml-4 select2 weekNum" style="width: 50%;">
                                             </select>
                                         </div>
                                         </div>
@@ -84,7 +90,7 @@
                                                      <label class="mr-3 ml-2">Month :</label>
                                             </div>
                                         <div class="col-8">
-                                            <select id="month" name="monthSelect" class="form-control ml-4 select2 monthNum" style="width: 50%;">
+                                            <select id="month" name="4" class="form-control ml-4 select2 monthNum" style="width: 50%;">
                                             </select>
                                         </div>
                                         </div>
@@ -94,21 +100,20 @@
                                                      <label class="mr-3 ml-2">Year :</label>
                                             </div>
                                         <div class="col-8">
-                                            <select id="year" name="yearSelect" class="form-control ml-4 select2 yearNum" style="width: 50%;">
+                                            <select id="year" name="5" class="form-control ml-4 select2 yearNum" style="width: 50%;">
                                             </select>
                                         </div>
                                         </div>
+                                    </div>
 
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label>Multiple</label>
-                                            <select id="select2bs4" class="select2bs4" multiple="multiple" data-placeholder="Select Email"
-                                                    style="width: 100%;">
-                                                {{-- @foreach ($types as $type)
-                                                    <option value="{{$type->id}}">{{$type->id}}</option>
-                                                @endforeach --}}
-                                            </select>
+                                            <select id="select2bs4" name="email[]" class="select2bs4"
+                                            multiple="multiple" data-placeholder="Select Email"
+                                            style="width: 100%;">
+                                        </select>
                                           </div>
                                     </div>
                                         <!-- /.card-body -->

@@ -26,7 +26,7 @@
         @endif
         <div class="card">
             <div class="card-header text-right">
-                <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#type-create">Create config Email</button>
+                <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#email-create">Create config Email</button>
                 {{-- <a href="email_configuration/show">cek</a> --}}
             </div>
             <div class="card-body">
@@ -225,7 +225,7 @@ $(document).on('change', 'input:radio', function () {
     $(function(){
     var $select = $(".hourNum");
     var n = ' Hour';
-    for (i=1;i<=24;i++){
+    for (i=0;i<=24;i++){
         $select.append($('<option></option>').val(i).html(i+n))
     }
     });
@@ -233,7 +233,7 @@ $(document).on('change', 'input:radio', function () {
     $(function(){
     var $select = $(".dayNum");
     var n = ' Day';
-    for (i=1;i<=31;i++){
+    for (i=0;i<=31;i++){
         $select.append($('<option></option>').val(i).html(i+n))
     }
     });
@@ -241,7 +241,7 @@ $(document).on('change', 'input:radio', function () {
     $(function(){
     var $select = $(".weekNum");
     var n = ' Week';
-    for (i=1;i<=4;i++){
+    for (i=0;i<=4;i++){
         $select.append($('<option></option>').val(i).html(i+n))
     }
     });
@@ -249,7 +249,7 @@ $(document).on('change', 'input:radio', function () {
     $(function(){
     var $select = $(".monthNum");
     var n = ' Month';
-    for (i=1;i<=12;i++){
+    for (i=0;i<=12;i++){
         $select.append($('<option></option>').val(i).html(i+n))
     }
     });
@@ -257,16 +257,18 @@ $(document).on('change', 'input:radio', function () {
     $(function(){
     var $select = $(".yearNum");
     var n = ' Year';
-    for (i=1;i<=5;i++){
+    for (i=0;i<=5;i++){
         $select.append($('<option></option>').val(i).html(i+n))
     }
     });
 
     //Multiple Select
-    $(".select2bs4").select2({
-    tags: true,
-    multiple: true,
+    $(document).ready(function() {
+        var value = $(".select2bs4").select2();
+        $(".select2bs4").val(value).trigger('change');
     });
+
+
     $.ajax({
         type: "GET",
         url: "email_configuration/show",
@@ -285,6 +287,17 @@ $(document).on('change', 'input:radio', function () {
     }
     });
 </script>
-
+<script type="text/javascript">
+    @if (count($errors) > 0)
+        $('#email-create').modal('show');
+    @endif
+</script>
+{{-- <script>
+    $(document).ready(function () {
+        if ({{ requestOld::old('openModal', 'false') }}) {
+            //JavaScript code that open up your modal.
+        }
+    });
+</script> --}}
 
 @endpush
