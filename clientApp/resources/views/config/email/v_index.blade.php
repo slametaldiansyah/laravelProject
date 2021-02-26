@@ -36,7 +36,7 @@
                             <th width="30px">No</th>
                             <th class="text-center">Frequency</th>
                             <th class="text-center">Duration</th>
-                            <th class="text-center">Mail</th>
+                            <th class="text-center">Emails</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
@@ -50,12 +50,12 @@
                                 {{-- {{$e->email}} --}}
                                 <div class="btn-group">
                                     <button id="typeEdit" class="btn btn-warning btn-sm dropdown-hover"
-                                    data-toggle="modal" data-target="#type-edit"
+                                    data-toggle="modal" data-target="#show-email"
                                     data-id="{{$e->id}}"
                                     onclick="emailShow(this)">
                                         <i class="nav-icon fas fa-eye"></i>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item">Cek Mail</a>
+                                            <a class="dropdown-item">Cek Email</a>
                                         </div>
                                     </button>
                                 </div>
@@ -98,7 +98,7 @@
                             <th width="30px">No</th>
                             <th class="text-center">Frequency</th>
                             <th class="text-center">Duration</th>
-                            <th class="text-center">Mail</th>
+                            <th class="text-center">Emails</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </tfoot>
@@ -108,6 +108,7 @@
     </div>
 </div>
 @include('config.email.modal.m_create')
+@include('config.email.modal.m_show_email')
 {{-- @include('config.typecontract.modal.m_edit') --}}
 @endsection
 @push('custom-js')
@@ -173,19 +174,6 @@
         $('#type-create').modal('show');
     @endif
 </script>
-<script type="application/javascript">
-    $('input[type="checkbox"]').on('customSwitch1', function (e, data) {
-        var $element = $(data.el),
-            value = data.value;
-        $element.attr('value', value);
-    });
-    $('input[type="checkbox"]').on('customSwitch2', function (e, data) {
-        var $element = $(data.el),
-            value = data.value;
-        $element.attr('value', value);
-    });
-</script>
-
 <!-- Selected -->
 <script>
 $(document).on('change', 'input:radio', function () {
@@ -299,12 +287,52 @@ $(document).on('change', 'input:radio', function () {
         $('#email-create').modal('show');
     @endif
 </script>
-{{-- <script>
-    $(document).ready(function () {
-        if ({{ requestOld::old('openModal', 'false') }}) {
-            //JavaScript code that open up your modal.
-        }
-    });
-</script> --}}
+<script>
+    function emailShow(e) {
+        var EmailConfigId = $(e).data("id");
+        var token = $("meta[name='csrf-token']").attr("content");
+        if (e) {
+            $('#aldiTable').DataTable({
+            processing: true,
+            // serverSide: true,
+            destroy: true,
+            responsive: true,
+            ajax: {
+            url: "/email/show" + EmailConfigId,
+            type: 'get',
+            data: {
+                "id": EmailConfigId,
+                "_token": token,},
+                // "dataSrc": "dataPay"
+                dataSrc: function(json) {
+                    if ( json.dataE === null ) {
+                        return [];
+                    }
+                    // var amount = JSON.parse(json.dataPay);
+                    // console.log(json.dataE);
+                    return json.dataE;
+                    }
+            },
+            columns: [
+                    {data: "id"},
+                    {data: "email",  className: "text-center"}
+                    ],
+            "columnDefs": [
+                        {
+                        "data": null
+                        }
+
+                    ],
+            language: {
+                search : '<i class="fas fa-search"></i>',
+                searchPlaceholder: "Search",
+                'paginate': {
+                    'previous': '<a>Back <i class="fas fa-hand-point-left"></i></a>',
+                    'next': '<a><i class="fas fa-hand-point-right"></i> Next</a>',
+                    }}
+        });
+    }
+    }
+</script>
 
 @endpush

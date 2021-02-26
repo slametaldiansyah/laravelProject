@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\ContractsController;
 use App\Http\Controllers\EmailConfigController;
+use App\Http\Controllers\EmailsController;
 //use App\Http\Controllers\Contract_docController;
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\OperationalsController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Progress_statusController;
 use App\Http\Controllers\Projects_statusController;
 use App\Http\Controllers\TypeController;
+use App\Models\Email;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,3 +65,5 @@ Route::resource('/types', TypeController::class)->middleware('authapi');
 //email
 Route::resource('/email_configuration', EmailConfigController::class)->middleware('authapi');
 // Route::get('/email_configuration/getListEmail', [OperationalsController::class, 'getListEmail'])->middleware('authapi');
+
+Route::resource('/email', EmailsController::class)->middleware('authapi');
