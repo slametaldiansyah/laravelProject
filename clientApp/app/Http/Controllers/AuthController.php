@@ -27,6 +27,7 @@ class AuthController extends Controller
                 'password' => $credentials['password'],
             ]);
             $data = json_decode((string) $response->body(), true);
+            // dd($data);
             try {
                 $data['access_token'] == true;
                 session()->put('token', $data);

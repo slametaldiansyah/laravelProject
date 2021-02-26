@@ -22,11 +22,12 @@
 
               @php
               //Request Data
-                $username = session()->get('token')['detail_user'][0]['fullname'];
-                $position = session()->get('token')['position'][0]['name'];
-                $dob = session()->get('token')['detail_user'][0]['birth_date'];
-                $email = session()->get('token')['detail_user'][0]['email'];
-                $join = session()->get('token')['detail_user'][0]['join_date'];
+                // dd(session()->get('token'));
+                $username = session()->get('token')['user']['fullname'];
+                $position = session()->get('token')['user']['position'];
+                $dob = session()->get('token')['user']['birth_date'];
+                $email = session()->get('token')['user']['email'];
+                $join = session()->get('token')['user']['join_date'];
 
                 // dd(session()->get('token')['detail_user'][0]);
               @endphp

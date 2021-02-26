@@ -94,7 +94,7 @@
                     </div>
                     @php
                     //Request Data
-                      $username = session()->get('token')['detail_user'][0]['fullname'];
+                      $username = session()->get('token')['user']['username'];
                     @endphp
                     <div class="info">
                         <a href="{{ route('profile')}}" class="d-block">{{$username}}</a>
