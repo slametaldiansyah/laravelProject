@@ -61,7 +61,7 @@ class PaymentController extends Controller
          if($files != 0){
                  $filename = time().'.'.$files->getClientOriginalName();
                  Proof_of_invoice_payment::create([
-                 'actual_payment_id' => $id,
+                 'actual_payment_id' => '9',
                  'user_upload' => $userid,
                  'filename' => $filename,
                  ]);

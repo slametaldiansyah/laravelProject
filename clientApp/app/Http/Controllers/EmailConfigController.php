@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Email_configuration;
+use App\Models\Email;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -14,7 +16,9 @@ class EmailConfigController extends Controller
 {
     public function index()
     {
-        return view('config.email.v_index');
+        $ec = Email_configuration::with('frequency','email')->get();
+        // dd($ec);
+        return view('config.email.v_index',compact('ec'));
     }
 
     public function show()
@@ -22,6 +26,10 @@ class EmailConfigController extends Controller
         $token = session()->get('token')['access_token'];
         $response = Http::withToken($token)->get('http://127.0.0.1:8000/api/auth/get-email-list');
         $data = json_decode((string) $response->body(), true);
+        if ($data == null) {
+            Alert::error('Please login again', 'Your session has expired');
+            return redirect('/logout');
+        }
         // return response()->json(['dataPay' => $response]);
         return response()->json(['data' => $data]);
         // dd($data);
@@ -76,11 +84,28 @@ class EmailConfigController extends Controller
                     ->withErrors($validatorFreq)
                     ->withInput($request->all());
         }
+
+        $userid = session()->get('token')['user']['id'];
         $request->merge([
-           'duration' => $request->$n
+           'duration' => $request->$n,
+           'created_by' => $userid
             ]);
 
-        // dd($request->all());
-        // dd($request->$n);
+        $id = Email_configuration::create([
+            'frequency_id' => $request->frequency,
+            'duration' => $request->duration,
+            'created_by' => $request->created_by
+        ])->id;
+        // dd($id);
+        if ($id != null) {
+        foreach($request->email as $mails){
+            Email::create([
+                'email_config_id' => $id,
+                'email' => $mails,
+            ]);
+            }
+        }
+        Alert::toast('Data added successfully !!!', 'success');
+        return redirect('/email_configuration');
     }
 }

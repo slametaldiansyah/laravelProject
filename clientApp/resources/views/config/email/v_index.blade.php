@@ -34,27 +34,34 @@
                     <thead>
                         <tr>
                             <th width="30px">No</th>
-                            <th class="text-center">Name</th>
-                            <th class="text-center">display</th>
-                            <th class="text-center">Required</th>
+                            <th class="text-center">Frequency</th>
+                            <th class="text-center">Duration</th>
+                            <th class="text-center">Mail</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
-                    {{-- <tbody>
-                        @foreach($types as $type)
+                    <tbody>
+                        @foreach($ec as $e)
                         <tr>
                             <th class="text-center" width="30px">{{$loop->iteration}}</th>
-                            <td class="text-center">{{$type->name}}</td>
-                            <td class="text-center">{{$type->display}}</td>
+                            <td class="text-center">{{$e->frequency->name}}</td>
+                            <td class="text-center">{{$e->duration}}</td>
                             <td class="text-center">
-                                @if ($type->required == 1)
-                                <i class="nav-icon fas fa-check text-success"></i>
-                                @else
-                                <i class="nav-icon fas fa-times text-red"></i>
-                                @endif
+                                {{-- {{$e->email}} --}}
+                                <div class="btn-group">
+                                    <button id="typeEdit" class="btn btn-warning btn-sm dropdown-hover"
+                                    data-toggle="modal" data-target="#type-edit"
+                                    data-id="{{$e->id}}"
+                                    onclick="emailShow(this)">
+                                        <i class="nav-icon fas fa-eye"></i>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item">Cek Mail</a>
+                                        </div>
+                                    </button>
+                                </div>
                             </td>
                             <td class="text-center">
-                                <div class="btn-group">
+                                {{-- <div class="btn-group">
                                     <button id="typeEdit" class="btn btn-primary btn-sm dropdown-hover"
                                     data-toggle="modal" data-target="#type-edit"
                                     data-id="{{$type->id}}"
@@ -67,9 +74,9 @@
                                             <a class="dropdown-item">Edit</a>
                                         </div>
                                     </button>
-                                </div>
+                                </div> --}}
                                 <div class="btn-group">
-                                    <form action="/types/{{$type->id}}"
+                                    <form action="/email_configuration/{{$e->id}}"
                                         onsubmit="return confirm('Are you sure you want to delete?')" method="post"
                                         class="d-inline">
                                         @method('delete')
@@ -85,13 +92,13 @@
                             </td>
                         </tr>
                         @endforeach
-                    </tbody> --}}
+                    </tbody>
                     <tfoot>
                         <tr>
                             <th width="30px">No</th>
-                            <th class="text-center">Name</th>
-                            <th class="text-center">display</th>
-                            <th class="text-center">Required</th>
+                            <th class="text-center">Frequency</th>
+                            <th class="text-center">Duration</th>
+                            <th class="text-center">Mail</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </tfoot>
