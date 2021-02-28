@@ -16,7 +16,7 @@ class EmailConfigController extends Controller
 {
     public function index()
     {
-        $ec = Email_configuration::with('frequency','email')->get();
+        $ec = Email_configuration::with('frequency','email')->get()->sortDesc();
         // dd($ec);
         return view('config.email.v_index',compact('ec'));
     }
@@ -27,8 +27,8 @@ class EmailConfigController extends Controller
         $response = Http::withToken($token)->get('http://127.0.0.1:8000/api/auth/get-email-list');
         $data = json_decode((string) $response->body(), true);
         if ($data == null) {
-            Alert::error('Please login again', 'Your session has expired');
-            return redirect('/logout');
+            $alert = Alert::error('Please login again', 'Your session has expired');
+            return redirect('/logout')->with($alert);
         }
         // return response()->json(['dataPay' => $response]);
         return response()->json(['data' => $data]);
@@ -108,4 +108,14 @@ class EmailConfigController extends Controller
         Alert::toast('Data added successfully !!!', 'success');
         return redirect('/email_configuration');
     }
+    public function destroy(Email_configuration $email_configuration)
+    {
+        Email_configuration::destroy($email_configuration->id);
+        return redirect('/email_configuration')->with('status', 'Success Deleting Data!');
+    }
+    public function destroyEmail(Email $email)
+    {
+        Email::destroy($email->id);
+    }
+
 }

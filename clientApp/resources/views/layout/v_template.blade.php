@@ -9,6 +9,10 @@
 .spinner {
     display: none;
 }
+/* hide li*/
+.hideli{
+  display:none;
+}
 </style>
 
 <head>

@@ -54,16 +54,14 @@ Route::post('/progress_doc', [OperationalsController::class, 'uploadProgress'])-
 Route::get('/changestatus/{changestatus}', [OperationalsController::class, 'changeStatus'])->middleware('authapi');
 Route::get('/progress_doc/{progress_doc}', [OperationalsController::class, 'destroyDoc'])->middleware('authapi');
 
-Route::resource('/progress_status', Progress_statusController::class)->middleware('authapi');
-
 Route::resource('/projects_status', Projects_statusController::class)->middleware('authapi');
 
 Route::resource('/payments', PaymentController::class)->middleware('authapi');
 
-//type //config
-Route::resource('/types', TypeController::class)->middleware('authapi');
-//email
-Route::resource('/email_configuration', EmailConfigController::class)->middleware('authapi');
-// Route::get('/email_configuration/getListEmail', [OperationalsController::class, 'getListEmail'])->middleware('authapi');
-
-Route::resource('/email', EmailsController::class)->middleware('authapi');
+//config
+Route::middleware(['authapi','admin'])->group(function () {
+    Route::resource('/progress_status', Progress_statusController::class)->middleware('authapi');
+    Route::resource('/email', EmailsController::class)->middleware('authapi');
+    Route::resource('/email_configuration', EmailConfigController::class)->middleware('authapi');
+    Route::resource('/types', TypeController::class)->middleware('authapi');
+});

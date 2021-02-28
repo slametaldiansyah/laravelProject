@@ -20,7 +20,7 @@
                             <table id="aldiTable" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th width="30px">No</th>
+                                        <th width="30px">Id</th>
                                         <th class="text-center">email</th>
                                     </tr>
                                 </thead>
@@ -64,7 +64,7 @@
                                 </tbody> --}}
                                 <tfoot>
                                     <tr>
-                                        <th width="30px">No</th>
+                                        <th width="30px">Id</th>
                                         <th class="text-center">email</th>
                                     </tr>
                                 </tfoot>
