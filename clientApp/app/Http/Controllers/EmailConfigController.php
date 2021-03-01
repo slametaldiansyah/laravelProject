@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Email_configuration;
 use App\Models\Email;
 use App\Models\Type;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -108,6 +110,35 @@ class EmailConfigController extends Controller
         Alert::toast('Data added successfully !!!', 'success');
         return redirect('/email_configuration');
     }
+
+    public function update(Request $request)
+    {
+        // dd($request->all());
+
+        if ($request->email == null) {
+            DB::table('emails')->where('email_config_id', '=', $request->id)->delete();
+            Alert::toast('clean email !!!', 'success');
+            return back();
+        }
+        else{
+        DB::table('emails')->where('email_config_id', '=', $request->id)->delete();
+        $getRequest = $request->email;
+        foreach($getRequest as $m){
+            $test = Email::updateOrInsert(
+                ['email' => $m,'email_config_id' => $request->id],
+                ['email' => $m,
+                'email_config_id' => $request->id,
+                'created_at' => Carbon::now()->toDateTimeString(),
+                'updated_at' => Carbon::now()->toDateTimeString()
+                ]
+            );
+        }
+        Alert::toast('Data updated successfully !!!', 'success');
+        return redirect('/email_configuration');
+        }
+
+    }
+
     public function destroy(Email_configuration $email_configuration)
     {
         Email_configuration::destroy($email_configuration->id);

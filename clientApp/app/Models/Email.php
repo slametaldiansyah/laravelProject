@@ -11,6 +11,7 @@ class Email extends Model
     use HasFactory;
     use SoftDeletes;
     protected $guarded=['id'];
+    public $timestamps = true;
     // protected $fillable=['email'];
 
     public function email_configuration(){

@@ -97,16 +97,16 @@ form #debt-amount-slider input:checked ~ #debt-amount-pos {
   opacity: 1;
 }
 form #debt-amount-slider input:checked:nth-child(1) ~ #debt-amount-pos {
-  left: 10%;
+  left: 16.7%;
 }
 form #debt-amount-slider input:checked:nth-child(3) ~ #debt-amount-pos {
-  left: 30%;
-}
-form #debt-amount-slider input:checked:nth-child(5) ~ #debt-amount-pos {
   left: 50%;
 }
+form #debt-amount-slider input:checked:nth-child(5) ~ #debt-amount-pos {
+  left: 83.3%;
+}
 form #debt-amount-slider input:checked:nth-child(7) ~ #debt-amount-pos {
-  left: 70%;
+  left: 80.5%;
 }
 form #debt-amount-slider input:checked:nth-child(9) ~ #debt-amount-pos {
   left: 90%;

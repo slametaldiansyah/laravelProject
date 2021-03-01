@@ -25,10 +25,10 @@
         </div>
         @endif
         <div class="card">
-            <div class="card-header text-right">
-                <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#email-create">Create config Email</button>
+            {{-- <div class="card-header text-right"> --}}
+                {{-- <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#email-create">Create config Email</button> --}}
                 {{-- <a href="email_configuration/show">cek</a> --}}
-            </div>
+             {{-- </div> --}}
             <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
@@ -45,7 +45,16 @@
                         <tr>
                             <th class="text-center" width="30px">{{$loop->iteration}}</th>
                             <td class="text-center">{{$e->frequency->name}}</td>
-                            <td class="text-center">{{$e->duration}}</td>
+                            {{-- @if ($e->frequency->name == 'Day')
+                            <td class="text-center">{{$e->duration}}:00</td>
+                            @endif --}}
+                            @if ($e->frequency->name == 'Day')
+                            <td class="text-center">{{$e->duration}}:00</td>
+                            @elseif($e->frequency->name == 'Month')
+                            <td class="text-center">{{$e->duration}}th</td>
+                            @elseif($e->frequency->name == 'Week')
+                            <td class="text-center">Day {{$e->duration}}</td>
+                            @endif
                             <td class="text-center">
                                 {{-- {{$e->email}} --}}
                                 <div class="btn-group">
@@ -61,20 +70,20 @@
                                 </div>
                             </td>
                             <td class="text-center">
-                                {{-- <div class="btn-group">
+                                <div class="btn-group">
                                     <button id="typeEdit" class="btn btn-primary btn-sm dropdown-hover"
-                                    data-toggle="modal" data-target="#type-edit"
-                                    data-id="{{$type->id}}"
-                                    data-name="{{$type->name}}"
-                                    data-display="{{$type->display}}"
-                                    data-required="{{$type->required}}"
+                                    data-toggle="modal" data-target="#email-edit"
+                                    data-id="{{$e->id}}"
+                                    data-freq-id="{{$e->frequency->id}}"
+                                    data-duration="{{$e->duration}}"
+                                    data-email-id="{{$e->email}}"
                                     onclick="editData(this)">
                                         <i class="nav-icon fas fa-pen"></i>
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item">Edit</a>
                                         </div>
                                     </button>
-                                </div> --}}
+                                </div>
                                 <div class="btn-group">
                                     <form action="/email_configuration/{{$e->id}}"
                                         onsubmit="return confirm('Are you sure you want to delete?')" method="post"
@@ -107,7 +116,8 @@
         </div>
     </div>
 </div>
-@include('config.email.modal.m_create')
+{{-- @include('config.email.modal.m_create') --}}
+@include('config.email.modal.m_edit')
 @include('config.email.modal.m_show_email')
 {{-- @include('config.typecontract.modal.m_edit') --}}
 @endsection
@@ -135,23 +145,44 @@
         });
     });
     function editData(e) {
-        var typeId = $(e).data("id");
-        var name = $(e).data("name");
-        var display = $(e).data("display");
-        var required = $(e).data("required");
+        var id = $(e).data("id");
+        var freqId = $(e).data("freq-id");
+        var duration = $(e).data("duration");
+        var emails = $(e).data("email-id");
         if (e != 0) {
-        document.getElementById("id").value = typeId;
-        document.getElementById("name").value = name;
-        document.getElementById("display").value = display;
-        if (required == 1) {
-            document.getElementById("customSwitch1").checked = true;
-        } else {
-            document.getElementById("customSwitch1").checked = false;
+        document.getElementById("id").value = id;
+        var emailList = emails;
+        var listEmail = [];
+        emailList.forEach(myFunction);
+        function myFunction(item, index) {
+            listEmail.push(item.email);
         }
-    // alert(required);
+        if (freqId == 2) {
+            document.getElementById("2").checked = true;
+            document.getElementById("monthInput").style.display = "none";
+            document.getElementById("weekInput").style.display = "none";
+            document.getElementById("dayInput").style.display = "block";
+            document.getElementById("day").value = duration;
+            $(".select2bs4").select2().val(listEmail).trigger("change");
+        } else if(freqId == 3) {
+            document.getElementById("3").checked = true;
+            document.getElementById("monthInput").style.display = "none";
+            document.getElementById("dayInput").style.display = "none";
+            document.getElementById("weekInput").style.display = "block";
+            document.getElementById("week").value = duration;
+            $(".select2bs4").select2().val(listEmail).trigger("change");
+        } else if(freqId == 4){
+            document.getElementById("4").checked = true;
+            document.getElementById("dayInput").style.display = "none";
+            document.getElementById("weekInput").style.display = "none";
+            document.getElementById("monthInput").style.display = "block";
+            document.getElementById("month").value = duration;
+            $(".select2bs4").select2().val(listEmail).trigger("change");
+        }else{
+            alert('error');
+        }
     }else{
-    alert("no");
-    // console.log("")
+    alert("error");
     }
     }
     //button submit
@@ -227,25 +258,25 @@ $(document).on('change', 'input:radio', function () {
     //day
     $(function(){
     var $select = $(".dayNum");
-    var n = ' Day';
-    for (i=0;i<=31;i++){
+    var n = ':00';
+    for (i=0;i<=24;i++){
         $select.append($('<option></option>').val(i).html(i+n))
     }
     });
     //week
     $(function(){
     var $select = $(".weekNum");
-    var n = ' Week';
-    for (i=0;i<=4;i++){
-        $select.append($('<option></option>').val(i).html(i+n))
+    var n = 'Day ';
+    for (i=0;i<=7;i++){
+        $select.append($('<option></option>').val(i).html(n+i))
     }
     });
     //month
     $(function(){
     var $select = $(".monthNum");
-    var n = ' Month';
-    for (i=0;i<=12;i++){
-        $select.append($('<option></option>').val(i).html(i+n))
+    // var n = '';
+    for (i=0;i<=31;i++){
+        $select.append($('<option></option>').val(i).html(i))
     }
     });
     //year

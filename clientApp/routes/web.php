@@ -64,4 +64,5 @@ Route::middleware(['authapi','admin'])->group(function () {
     Route::resource('/email', EmailsController::class)->middleware('authapi');
     Route::resource('/email_configuration', EmailConfigController::class)->middleware('authapi');
     Route::resource('/types', TypeController::class)->middleware('authapi');
+    Route::get('/send-mail',[EmailsController::class,'sendMail']);
 });
