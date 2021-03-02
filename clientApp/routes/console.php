@@ -17,3 +17,9 @@ use Illuminate\Support\Facades\Artisan;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
+
+Artisan::command('sendmail:run',function(){
+    Artisan::call('sendmail:day');
+    Artisan::call('sendmail:week');
+    Artisan::call('sendmail:month');
+})->describe('Running commands');
