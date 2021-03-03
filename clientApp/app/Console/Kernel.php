@@ -14,9 +14,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        commands\sendMailEveryDay::class,
-        commands\sendMailEveryWeek::class,
-        commands\sendMailEveryMonth::class,
+        Commands\sendMailEveryDay::class,
+        Commands\sendMailEveryWeek::class,
+        Commands\sendMailEveryMonth::class,
     ];
 
     /**
@@ -33,18 +33,24 @@ class Kernel extends ConsoleKernel
         //     ->everyTwoMinutes();
         $day = Email_configuration::select('duration')->where('id', 5)->first();
         $week = Email_configuration::select('duration')->where('id', 8)->first();
-        $month = Email_configuration::select('duration')->where('id', 8)->first();
+        $month = Email_configuration::select('duration')->where('id', 7)->first();
 
         $h = (string)$day->duration;
         $w = $week->duration;
         $m = $month->duration;
 
         $schedule->command('sendmail:day')
-            ->dailyAt("{$h}:00");
+            ->dailyAt("{$h}:00")->withoutOverlapping();
+                // ->dailyAt("12:04")->withoutOverlapping();
         $schedule->command('sendmail:week')
-            ->weeklyOn($w, '8:00');
+            ->weeklyOn($w, '8:00')->withoutOverlapping();
         $schedule->command('sendmail:month')
-            ->monthlyOn($m, '8:00');
+            ->monthlyOn($m, '8:00')->withoutOverlapping();
+
+            //ketika data invoice == true
+            // $schedule->command('emails:send')->daily()->when(function () {
+            //     return true;
+            // });
     }
 
     /**
