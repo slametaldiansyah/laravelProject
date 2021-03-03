@@ -29,7 +29,8 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Test Mail Form Project-Tracking')->view('config.email.send.s_index');
+        // return $this->subject('Test Mail Form Project-Tracking')->view('config.email.send.s_index');
+        return $this->view('config.email.send.s_index');
         // return $this->view('view.name');
     }
 }

@@ -26,6 +26,7 @@ Artisan::command('sendmail:run',function(){
     // Artisan::call('sendmail:day');
     // Artisan::call('sendmail:week');
     // Artisan::call('sendmail:month');
+    Artisan::queue('sendmail:createInvoices');
     Artisan::queue('sendmail:day');
     Artisan::queue('sendmail:week');
     Artisan::queue('sendmail:month');

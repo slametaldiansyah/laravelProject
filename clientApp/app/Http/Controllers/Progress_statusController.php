@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Progress_item;
 use App\Models\Progress_status;
 use Illuminate\Http\Request;
 
@@ -14,6 +15,14 @@ class Progress_statusController extends Controller
      */
     public function index()
     {
+        // $p = Progress_item::whereNotNull('status_id')->whereNull('invoice_status_id')->get();
+        // // dd($p->name_progress);
+        // foreach($p as $ps){
+        //     echo $ps->name_progress;
+        //     echo ' <br> ';
+            // print_r($ps->name_progress);
+        // }
+
        $progress_status= Progress_status::all();
        return view('status.v_index', compact('progress_status'));
     }
