@@ -18,6 +18,7 @@ class Kernel extends ConsoleKernel
         Commands\sendMailEveryWeek::class,
         Commands\sendMailEveryMonth::class,
         Commands\sendMailToCreateInvoice::class,
+        Commands\sendMailPayment::class,
     ];
 
     /**
@@ -34,6 +35,10 @@ class Kernel extends ConsoleKernel
         //     ->everyTwoMinutes();
         $schedule->command('sendmail:createInvoices')
             ->dailyAt("22:23")->withoutOverlapping();
+
+        $schedule->command('sendmail:payment')
+            ->dailyAt("14:45")->withoutOverlapping();
+
 
         $day = Email_configuration::select('duration')->where('id', 5)->first();
         $week = Email_configuration::select('duration')->where('id', 8)->first();
