@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Mail\SendMail;
+use App\Models\Email;
 use App\Models\Invoice;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -65,8 +66,15 @@ class sendMailPayment extends Command
                                     Amount neet to be paid : Rp. {$pay} <br>
                                 "
                     ];
-                    Mail::to("aldi24511@gmail.com")->send(new SendMail($details));
-
+                    //day
+                    $listMail = Email::where('email_config_id', 5)->get();
+                    if ($listMail == true) {
+                        foreach ($listMail as $l) {
+                            Mail::to($l->email)->send(new SendMail($details));
+                            }
+                                }else{
+                                    return 0;
+                                }
                     }else{
                         return 0;
                     }

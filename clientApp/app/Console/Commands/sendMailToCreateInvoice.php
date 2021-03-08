@@ -48,9 +48,19 @@ class sendMailToCreateInvoice extends Command
                 'title' => $notif->name_progress,
                 'body' => 'Your progress is running, click the payment button to complete your payment'
             ];
+
+             //day
+             $listMail = Email::where('email_config_id', 5)->get();
+             if ($listMail == true) {
+                 foreach ($listMail as $l) {
+                     Mail::to($l->email)->send(new SendMail($details));
+                     }
+                         }else{
+                             return 0;
+                     }
             // Mail::to("projecttrac6@gmail.com")->send(new SendMail($details));
             // Mail::from('projecttrac6@gmail.com', 'Project-Tracking');
-            Mail::to("aldi24511@gmail.com")->send(new SendMail($details));
+            // Mail::to("aldi24511@gmail.com")->send(new SendMail($details));
             }
         }else{
             return 0;
