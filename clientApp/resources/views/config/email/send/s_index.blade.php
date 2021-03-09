@@ -10,7 +10,16 @@
     <h1>{{$details['title']}}</h1>
     {{-- {{$details['body']}} --}}
 
-    <p>{!! $details['body'] !!}</p>
+    {{-- <p> --}}
+        <table>
+            <tr>
+                @foreach ($details['body'] as $item)
+                    {!!$item!!}
+                @endforeach
+        {{-- {!! $details['body'] !!} --}}
+            <tr>
+        </table>
+    {{-- </p> --}}
     <p>Thank You</p>
 </body>
 </html>

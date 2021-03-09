@@ -33,11 +33,11 @@ class Kernel extends ConsoleKernel
 
         // $schedule->command('sendmail:day')
         //     ->everyTwoMinutes();
-        $schedule->command('sendmail:createInvoices')
-            ->dailyAt("22:23")->withoutOverlapping();
+        // $schedule->command('sendmail:createInvoices')
+        //     ->dailyAt("22:23")->withoutOverlapping();
 
-        $schedule->command('sendmail:payment')
-            ->dailyAt("14:45")->withoutOverlapping();
+        // $schedule->command('sendmail:payment')
+        //     ->dailyAt("14:45")->withoutOverlapping();
 
 
         $day = Email_configuration::select('duration')->where('id', 5)->first();
