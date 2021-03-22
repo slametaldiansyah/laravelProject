@@ -30,6 +30,7 @@ class CreateProjectsHistoryTable extends Migration
             $table->bigInteger('total_price')->nullable();
             $table->bigInteger('created_by')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

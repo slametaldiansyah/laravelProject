@@ -19,6 +19,7 @@ class CreateProofOfInvoicePayment extends Migration
             $table->bigInteger('user_upload');
             $table->string('filename');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

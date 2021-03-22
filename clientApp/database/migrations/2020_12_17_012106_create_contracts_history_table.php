@@ -28,7 +28,9 @@ class CreateContractsHistoryTable extends Migration
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->bigInteger('created_by')->nullable();
+            $table->bigInteger('type_id')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -18,6 +18,7 @@ class CreateProgressDocsTable extends Migration
             $table->foreignId('progress_item_id')->constrained('progress_items')->onDelete('cascade')->onUpdate('cascade');
             $table->string('filename');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

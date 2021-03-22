@@ -16,6 +16,8 @@ class CreateFrequency extends Migration
         Schema::create('frequencies', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -26,6 +28,6 @@ class CreateFrequency extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('frequency');
+        Schema::dropIfExists('frequencies');
     }
 }

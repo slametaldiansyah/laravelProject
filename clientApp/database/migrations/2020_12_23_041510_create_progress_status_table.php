@@ -16,7 +16,10 @@ class CreateProgressStatusTable extends Migration
         Schema::create('progress_status', function (Blueprint $table) {
             $table->id();
             $table->string('status')->nullable();
+            $table->bigInteger('created_by')->nullable();
+            $table->bigInteger('updated_by')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

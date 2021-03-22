@@ -21,6 +21,7 @@ class CreateTableActualPayment extends Migration
             $table->bigInteger('amount');
             $table->date('payment_date')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

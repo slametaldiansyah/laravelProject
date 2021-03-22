@@ -22,6 +22,7 @@ class CreateProgressItemsHistoryTable extends Migration
             $table->bigInteger('payment_percentage')->nullable();
             $table->bigInteger('status_id')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

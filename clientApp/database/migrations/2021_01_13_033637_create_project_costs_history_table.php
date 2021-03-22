@@ -22,6 +22,7 @@ class CreateProjectCostsHistoryTable extends Migration
             $table->string('desc')->nullable();
             $table->bigInteger('total_cost')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

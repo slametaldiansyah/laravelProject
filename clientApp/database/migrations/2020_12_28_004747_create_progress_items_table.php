@@ -20,7 +20,9 @@ class CreateProgressItemsTable extends Migration
             $table->bigInteger('payment_percentage')->nullable();
             $table->foreignId('status_id')->nullable()->constrained('progress_status')->onDelete('cascade')->onUpdate('cascade');
             //$table->bigInteger('status_id')->nullable();
+            $table->foreignId('invoice_status_id')->nullable()->constrained('progress_status')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

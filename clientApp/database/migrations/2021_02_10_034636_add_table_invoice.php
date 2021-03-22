@@ -20,6 +20,7 @@ class AddTableInvoice extends Migration
             $table->bigInteger('user_trigger');
             $table->bigInteger('amount_total')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

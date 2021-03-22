@@ -15,20 +15,20 @@ class PaymentController extends Controller
 {
     public function index()
     {
-        $nonInvoice = Progress_item::whereNotNull('status_id')->whereNull('invoice_status_id')->get();
-        dd($nonInvoice);
-        // $clients= Client::all();
-        // $invoiceList = Invoice::with(
-        //     'project',
-        //     'project.contract.client',
-        //     'progress_item')
-        //     ->withCount(['actual_payment as actualPay' =>
-        //     function($query)
-        //     {
-        //         $query->select(DB::raw('SUM(amount)'));
-        //     }])->get();
+        // $nonInvoice = Progress_item::whereNotNull('status_id')->whereNull('invoice_status_id')->get();
+        // dd($nonInvoice);
+        $clients= Client::all();
+        $invoiceList = Invoice::with(
+            'project',
+            'project.contract.client',
+            'progress_item')
+            ->withCount(['actual_payment as actualPay' =>
+            function($query)
+            {
+                $query->select(DB::raw('SUM(amount)'));
+            }])->get();
 
-        // return view('payments.v_index', compact('invoiceList','clients'));
+        return view('payments.v_index', compact('invoiceList','clients'));
     }
     public function show(Request $request)
     {

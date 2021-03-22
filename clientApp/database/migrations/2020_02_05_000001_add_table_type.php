@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnCreatedByProgressStatus extends Migration
+class AddTableType extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,15 @@ class AddColumnCreatedByProgressStatus extends Migration
      */
     public function up()
     {
-        Schema::table('progress_status', function (Blueprint $table) {
+        Schema::create('types', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('display')->default('block');
+            $table->boolean('required')->nullable();
             $table->bigInteger('created_by')->nullable();
             $table->bigInteger('updated_by')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -26,9 +32,6 @@ class AddColumnCreatedByProgressStatus extends Migration
      */
     public function down()
     {
-        Schema::table('progress_status', function (Blueprint $table) {
-            $table->bigInteger('created_by')->nullable();
-            $table->bigInteger('updated_by')->nullable();
-        });
+        Schema::dropIfExists('types');
     }
 }

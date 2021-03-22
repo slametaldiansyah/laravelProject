@@ -113,7 +113,28 @@ class EmailConfigController extends Controller
 
     public function update(Request $request)
     {
-        // dd($request->all());
+        $userid = session()->get('token')['user']['id'];
+        $request->merge([
+           'updated_by' => $userid
+            ]);
+        $n = $request->frequency;
+        if ($request->frequency == 4) {
+            Email_configuration::where('id', 7)->update([
+                'duration' => $request->$n,
+                'updated_by' => $request->updated_by
+            ]);
+        }
+        elseif ($request->frequency == 3) {
+            Email_configuration::where('id', 8)->update([
+                'duration' => $request->$n,
+                'updated_by' => $request->updated_by
+            ]);
+        }elseif ($request->frequency == 2) {
+            Email_configuration::where('id', 5)->update([
+                'duration' => $request->$n,
+                'updated_by' => $request->updated_by
+            ]);
+        }
 
         if ($request->email == null) {
             DB::table('emails')->where('email_config_id', '=', $request->id)->delete();
